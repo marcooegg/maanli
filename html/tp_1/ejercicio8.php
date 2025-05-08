@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+    <link rel="stylesheet" href="static/src/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Ejercicio 8</h1>
+        <h2>Estructuras condicionales anidadas.</h2>
+        <div class="navbar">
+            <button id="btnPunto1" class="punto">Punto 1</button>
+            <button id="btnPunto2" class="punto">Punto 2</button>
+            <button id="btnPunto3" class="punto">Punto 3</button>
+            <button id="btnPunto4" class="punto">Punto 4</button>
+        </div>
+    </header>
+    <div id="main">
+        <div id="punto1" class="punto-form hidden">
+            <h3>Punto 1</h3>
+            <form action="ejercicio8.php" method="post">
+                <div>
+                    <label for="numero1">Numero 1:</label>
+                    <input type="number" name="numero1" id="numero1" required>
+                </div>
+                <div>
+                    <label for="numero2">Numero 2:</label>
+                    <input type="number" name="numero2" id="numero2" required>
+                </div>
+                <div>
+                    <label for="numero3">Numero 3:</label>
+                    <input type="number" name="numero3" id="numero3" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto2" class="punto-form hidden">
+            <h3>Punto 2</h3>
+            <form action="ejercicio8.php" method="post">
+                <div>
+                    <label for="numeroPunto2">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto2" id="numeroPunto2" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto3" class="punto-form hidden">
+            <h3>Punto 3</h3>
+            <form action="ejercicio8.php" method="post">
+                <div>
+                <label for="numeroPunto3">Ingrese un numero de hasta 3 cifras:</label>
+                <input type="number" name="numeroPunto3" id="numeroPunto3" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto4" class="punto-form hidden">
+            <h3>Punto 4</h3>
+            <form action="ejercicio8.php" method="post">
+                <div>
+                <label for="nombrePostulante">Nombre del postulante</label>
+                <input type="text" name="nombrePostulante" id="nombrePostulante" required>
+                </div>
+                <!-- cantidad de preguntas -->
+                <div>
+                <label for="cantidadPreguntas">Cantidad de preguntas</label>
+                <input type="number" name="cantidadPreguntas" id="cantidadPreguntas" required>
+                </div>
+                <!-- cantidad de respuestas correctas -->
+                <div>
+                <label for="cantidadCorrectas">Cantidad de respuestas correctas</label>
+                <input type="number" name="cantidadCorrectas" id="cantidadCorrectas" required>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <button type="button" class="ResolveJS">Resolver con JS</button>
+        <!-- <input type="submit" class="ResolvePHP" value="Enviar"> -->
+        <div id="resultado"></div>
+    </footer>
+    <script>
+        const punto1 = document.querySelector("#punto1");
+        const punto2 = document.querySelector("#punto2");
+        const punto3 = document.querySelector("#punto3");
+        const punto4 = document.querySelector("#punto4");
+        const max = (arr) => Math.max(...arr);
+        const btnPunto1 = document.querySelector("#btnPunto1");
+        const btnPunto2 = document.querySelector("#btnPunto2");
+        const btnPunto3 = document.querySelector("#btnPunto3");
+        const btnPunto4 = document.querySelector("#btnPunto4");
+        const resultado = document.querySelector("#resultado");
+
+        const removeOtrosPuntos = function() {
+            const otrosPuntos = document.getElementsByClassName("punto-form");
+            for (const element of otrosPuntos) {
+                element.classList.remove("active");
+                element.classList.add("hidden");
+            }
+        }
+        const showPunto = function(punto) {
+            document.querySelector(`#${punto}`).classList.add("active");
+            document.querySelector(`#${punto}`).classList.remove("hidden");
+        }
+
+        btnPunto1.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto1");
+        });
+
+        btnPunto2.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto2");
+        });
+
+        btnPunto3.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto3");
+        });
+
+        btnPunto4.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto4");
+        });
+
+        const resolvePunto1 = function() {
+            const numero1 = parseInt(document.querySelector("#numero1").value);
+            const numero2 = parseInt(document.querySelector("#numero2").value);
+            const numero3 = parseInt(document.querySelector("#numero3").value);
+            return `El numero maximo es ${max([numero1, numero2, numero3])}`;
+        };
+        const resolvePunto2 = function() {
+            const numero = parseInt(document.querySelector("#numeroPunto2").value);
+            let res;
+            if (numero == 0){
+                res = "cero";
+            } else if (numero > 0) {
+                res = "positivo";
+            } else {
+                res = "negativo";
+            }
+            return `El numero es ${res}`;
+        };
+        const resolvePunto3 = function() {
+            const numero = parseInt(document.querySelector("#numeroPunto3").value);
+            let res;
+            res = numero.toString().length;
+            return `El numero tiene ${res} cifras`;
+        };
+        const resolvePunto4 = function() {
+            const nombrePostulante = document.querySelector("#nombrePostulante").value;
+            const cantidadPreguntas = parseInt(document.querySelector("#cantidadPreguntas").value);
+            const cantidadCorrectas = parseInt(document.querySelector("#cantidadCorrectas").value);
+
+            let res;
+            const porcentaje = (cantidadCorrectas / cantidadPreguntas) * 100;
+            if (porcentaje >= 90) {
+                res = "Nivel Superior";
+            } else if (porcentaje >= 75) {
+                res = "Nivel Medio";
+            } else if (porcentaje >= 50){
+                res = "Nivel Regular"
+            } else {
+                res = "Fuera de nivel";
+            }
+            return `El postulante ${nombrePostulante} tiene un nivel ${res}. Porcentaje ${porcentaje.toFixed(2)}%`;
+        };
+        document.querySelector(".ResolveJS").addEventListener("click", function (event) {
+            resultado.innerHTML = ""; // Limpiar el resultado anterior
+            let result = "";
+            if (punto1.classList.contains("active")) {
+                result = resolvePunto1();
+            } else if (punto2.classList.contains("active")) {
+                result = resolvePunto2();
+            } else if (punto3.classList.contains("active")) {
+                result = resolvePunto3();
+            } else if (punto4.classList.contains("active")) {
+                result = resolvePunto4();
+            } else {
+                result = "No se ha seleccionado un punto.";
+            }
+            resultado.innerHTML = result;
+        });
+    </script>
+    <?php ?>
+</body>
+
+</html>

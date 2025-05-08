@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 12</title>
+    <link rel="stylesheet" href="static/src/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Ejercicio 12</h1>
+        <h2>Estructura repetitiva (while)</h2>
+        <div class="navbar">
+            <button id="btnPunto1" class="punto">Punto 1</button>
+            <button id="btnPunto2" class="punto">Punto 2</button>\
+        </div>
+    </header>
+    <div id="main">
+        <div id="punto1" class="punto-form hidden">
+        </div>
+        <div id="punto2" class="punto-form hidden">
+        </div>
+    </div>
+    <footer>
+        <button type="button" class="ResolveJS">Resolver con JS</button>
+        <div id="resultado"></div>
+    </footer>
+    <script>
+        const punto1 = document.querySelector("#punto1");
+        const punto2 = document.querySelector("#punto2");
+        const btnPunto1 = document.querySelector("#btnPunto1");
+        const btnPunto2 = document.querySelector("#btnPunto2");
+        const resultado = document.querySelector("#resultado");
+
+        const removeOtrosPuntos = function() {
+            const otrosPuntos = document.getElementsByClassName("punto-form");
+            for (const element of otrosPuntos) {
+                element.classList.remove("active");
+                element.classList.add("hidden");
+            }
+        }
+        const showPunto = function(punto) {
+            document.querySelector(`#${punto}`).classList.add("active");
+            document.querySelector(`#${punto}`).classList.remove("hidden");
+        }
+
+        btnPunto1.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto1");
+        });
+
+        btnPunto2.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto2");
+        });
+
+        const resolvePunto1 = function() {
+            result = "";
+            let i = 1;
+            const step = 11;
+            while (i <= 25) {
+                result += `${i * 11}<br>`;
+                i++;
+            }
+            return result
+        };
+        const resolvePunto2 = function() {
+            let result = "";
+            let mult = 2;
+            let res = 8;
+            while (res < 500){
+                result += `${res}<br>`;
+                res = 8 * mult;
+                mult += 1;
+            }
+            return result;
+        };
+        
+        document.querySelector(".ResolveJS").addEventListener("click", function (event) {
+            resultado.innerHTML = ""; // Limpiar el resultado anterior
+            let result = "";
+            if (punto1.classList.contains("active")) {
+                result = resolvePunto1();
+            } else if (punto2.classList.contains("active")) {
+                result = resolvePunto2();
+            } else {
+                result = "No se ha seleccionado un punto.";
+            }
+            resultado.innerHTML = result;
+        });
+    </script>
+    <?php ?>
+</body>
+
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 13</title>
+    <link rel="stylesheet" href="static/src/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Ejercicio 13</h1>
+        <h2>Operadores lógicos && (y) en las estructuras condicionales.</h2>
+        <div class="navbar">
+            <button id="btnPunto1" class="punto">Punto 1</button>
+            <button id="btnPunto2" class="punto">Punto 2</button>
+            <button id="btnPunto3" class="punto">Punto 3</button>
+            <button id="btnPunto4" class="punto">Punto 4</button>
+            <button id="btnPunto5" class="punto">Punto 5</button>
+            <button id="btnPunto6" class="punto">Punto 6</button>
+            <button id="btnPunto7" class="punto">Punto 7</button>
+        </div>
+    </header>
+    <div id="main">
+        <div id="punto1" class="punto-form hidden">
+            <h3>Punto 1</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto1_1">Dia:</label>
+                    <input type="number" name="numeroPunto1_1" id="numeroPunto1_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto1_2">Mes:</label>
+                    <input type="number" name="numeroPunto1_2" id="numeroPunto1_2" required>
+                </div>
+                <div>
+                    <label for="numeroPunto1_3">Ano:</label>
+                    <input type="number" name="numeroPunto1_3" id="numeroPunto1_3" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto2" class="punto-form hidden">
+            <h3>Punto 2</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto2_1">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto2_1" id="numeroPunto2_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto2_2">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto2_2" id="numeroPunto2_2" required>
+                </div>
+                <div>
+                    <label for="numeroPunto2_3">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto2_3" id="numeroPunto2_3" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto3" class="punto-form hidden">
+            <h3>Punto 3</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto3_1">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto3_1" id="numeroPunto3_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto3_2">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto3_2" id="numeroPunto3_2" required>
+                </div>
+                <div>
+                    <label for="numeroPunto3_3">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto3_3" id="numeroPunto3_3" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto4" class="punto-form hidden">
+            <h3>Punto 4</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto4_1">Ingrese X:</label>
+                    <input type="number" name="numeroPunto4_1" id="numeroPunto4_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto4_2">Ingrese Y:</label>
+                    <input type="number" name="numeroPunto4_2" id="numeroPunto4_2" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto5" class="punto-form hidden">
+            <h3>Punto 5</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto5_1">Sueldo:</label>
+                    <input type="number" name="numeroPunto5_1" id="numeroPunto5_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto5_2">Antiguedad:</label>
+                    <input type="number" name="numeroPunto5_2" id="numeroPunto5_2" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto6" class="punto-form hidden">
+            <h3>Punto 6</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto6_1">Sueldo:</label>
+                    <input type="number" name="numeroPunto6_1" id="numeroPunto6_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto6_2">Antiguedad:</label>
+                    <input type="number" name="numeroPunto6_2" id="numeroPunto6_2" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto7" class="punto-form hidden">
+            <h3>Punto 7</h3>
+            <form action="ejercicio13.php" method="post">
+                <div>
+                    <label for="numeroPunto7_1">Sueldo:</label>
+                    <input type="number" name="numeroPunto7_1" id="numeroPunto7_1" required>
+                </div>
+                <div>
+                    <label for="numeroPunto7_2">Antiguedad:</label>
+                    <input type="number" name="numeroPunto7_2" id="numeroPunto7_2" required>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <button type="button" class="ResolveJS">Resolver con JS</button>
+        <!-- <input type="submit" class="ResolvePHP" value="Enviar"> -->
+        <div id="resultado"></div>
+    </footer>
+    <script>
+        const punto1 = document.querySelector("#punto1");
+        const punto2 = document.querySelector("#punto2");
+        const punto3 = document.querySelector("#punto3");
+        const punto4 = document.querySelector("#punto4");
+        const punto5 = document.querySelector("#punto5");
+        const punto6 = document.querySelector("#punto6");
+        const punto7 = document.querySelector("#punto7");
+        const btnPunto1 = document.querySelector("#btnPunto1");
+        const btnPunto2 = document.querySelector("#btnPunto2");
+        const btnPunto3 = document.querySelector("#btnPunto3");
+        const btnPunto4 = document.querySelector("#btnPunto4");
+        const btnPunto5 = document.querySelector("#btnPunto5");
+        const btnPunto6 = document.querySelector("#btnPunto6");
+        const btnPunto7 = document.querySelector("#btnPunto7");
+        const resultado = document.querySelector("#resultado");
+
+        const removeOtrosPuntos = function() {
+            const otrosPuntos = document.getElementsByClassName("punto-form");
+            for (const element of otrosPuntos) {
+                element.classList.remove("active");
+                element.classList.add("hidden");
+            }
+        }
+        const showPunto = function(punto) {
+            document.querySelector(`#${punto}`).classList.add("active");
+            document.querySelector(`#${punto}`).classList.remove("hidden");
+        }
+
+        btnPunto1.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto1");
+        });
+
+        btnPunto2.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto2");
+        });
+
+        btnPunto3.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto3");
+        });
+
+        btnPunto4.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto4");
+        });
+        btnPunto5.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto5");
+        });
+        btnPunto6.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto6");
+        });
+        btnPunto7.addEventListener("click", () => {
+            removeOtrosPuntos();
+            showPunto("punto7");
+        });
+
+        const resolvePunto1 = function() {
+            const dia = parseInt(document.querySelector("#numeroPunto1_1").value);
+            const mes = parseInt(document.querySelector("#numeroPunto1_2").value);
+            const ano = parseInt(document.querySelector("#numeroPunto1_3").value);
+            if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || ano < 1900) {
+                return "Fecha no valida";
+            }
+            if (dia == 25 && mes == 12) {
+                return "Feliz Navidad!";
+            }
+            return `La fecha es ${dia}/${mes}/${ano}`;
+        };
+        const resolvePunto2 = function() {
+            const numero1 = parseInt(document.querySelector("#numeroPunto2_1").value);
+            const numero2 = parseInt(document.querySelector("#numeroPunto2_2").value);
+            const numero3 = parseInt(document.querySelector("#numeroPunto2_3").value);
+            if (numero1 == numero2 && numero2 == numero3 ) {
+                return `El resultado es ${(numero1 + numero2)*numero3}`
+            } else {
+                return "Los numeros no son iguales";
+            }
+        };
+        const resolvePunto3 = function() {
+            const numero1 = parseInt(document.querySelector("#numeroPunto3_1").value);
+            const numero2 = parseInt(document.querySelector("#numeroPunto3_2").value);
+            const numero3 = parseInt(document.querySelector("#numeroPunto3_3").value);
+            if (numero1 < 10 && numero2 < 10 && numero3 < 10) {
+                return "Todos los numero son menores a 10";
+            } else {
+                return "Los numeros no son positivos";
+            }
+        };
+        const resolvePunto4 = function() {
+            const x = parseInt(document.querySelector("#numeroPunto4_1").value);
+            const y = parseInt(document.querySelector("#numeroPunto4_2").value);
+            if (x > 0 && y > 0) {
+                return `El punto esta en el cuadrante 1`;
+            } else if (x < 0 && y > 0) {
+                return `El punto esta en el cuadrante 2`;
+            } else if (x < 0 && y < 0) {
+                return `El punto esta en el cuadrante 3`;
+            } else if (x > 0 && y < 0) {
+                return `El punto esta en el cuadrante 4`;
+            } else {
+                return "El punto no puede estar en el origen";
+            }
+        };
+        const resolvePunto5 = function() {
+            const sueldo = parseInt(document.querySelector("#numeroPunto5_1").value);
+            const antiguedad = parseInt(document.querySelector("#numeroPunto5_2").value);
+            let aumento = 0;
+            if (sueldo < 500 && antiguedad >= 10) {
+                aumento = 20;
+            } else if (sueldo < 500 && antiguedad < 10) {
+                aumento = 5;
+            }
+            const neto = sueldo + (sueldo * aumento / 100);
+            return `El sueldo neto es ${neto}`;
+            
+        };
+        document.querySelector(".ResolveJS").addEventListener("click", function (event) {
+            resultado.innerHTML = ""; // Limpiar el resultado anterior
+            let result = "";
+            if (punto1.classList.contains("active")) {
+                result = resolvePunto1();
+            } else if (punto2.classList.contains("active")) {
+                result = resolvePunto2();
+            } else if (punto3.classList.contains("active")) {
+                result = resolvePunto3();
+            } else if (punto4.classList.contains("active")) {
+                result = resolvePunto4();
+            } else if (punto5.classList.contains("active")) {
+                result = resolvePunto5();
+            } else {
+                result = "No se ha seleccionado un punto.";
+            }
+            resultado.innerHTML = result;
+        });
+    </script>
+    <?php ?>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+    <link rel="stylesheet" href="static/src/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Ejercicio 7</h1>
+        <h2>Estructuras condicionales compuestas.</h2>
+        <div class="navbar">
+            <button id="btnPunto1" class="punto">Punto 1</button>
+            <button id="btnPunto2" class="punto">Punto 2</button>
+            <button id="btnPunto3" class="punto">Punto 3</button>
+        </div>
+    </header>
+    <div id="main">
+        <div id="punto1" class="punto-form hidden">
+            <h3>Punto 1</h3>
+            <form action="ejercicio7.php" method="post">
+                <div>
+                    <label for="numero1">Numero 1:</label>
+                    <input type="number" name="numero1" id="numero1" required>
+                </div>
+                <div>
+                    <label for="numero2">Numero 2:</label>
+                    <input type="number" name="numero2" id="numero2" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto2" class="punto-form hidden">
+            <h3>Punto 2</h3>
+            <form action="ejercicio7.php" method="post">
+                <div>
+                    <label for="nota1">Nota 1:</label>
+                    <input type="number" name="nota1" id="nota1" required>
+                </div>
+                <div>
+                    <label for="nota2">Nota 2:</label>
+                    <input type="number" name="nota2" id="nota2" required>
+                </div>
+                <div>
+                    <label for="nota3">Nota 3:</label>
+                    <input type="number" name="nota3" id="nota3" required>
+                </div>
+            </form>
+        </div>
+        <div id="punto3" class="punto-form hidden">
+            <h3>Punto 3</h3>
+            <form action="ejercicio7.php" method="post">
+                <div>
+                    <label for="numero3">Ingrese un numero entre 1 y 99</label>
+                    <input type="number" name="numero3" id="numero3" required>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <button type="button" class="ResolveJS">Resolver con JS</button>
+        <!-- <input type="submit" class="ResolvePHP" value="Enviar"> -->
+        <div id="resultado"></div>
+    </footer>
+    <script>
+        const punto1 = document.querySelector("#punto1");
+        const punto2 = document.querySelector("#punto2");
+        const punto3 = document.querySelector("#punto3");
+        const resultado = document.getElementById("resultado");
+        document.querySelector(".ResolveJS").addEventListener("click", function (event) {
+            resultado.innerHTML = ""; // Limpiar el resultado anterior
+            let result;
+            if (punto1.classList.contains("active")) {
+                const numero1 = parseInt(document.getElementById("numero1").value);
+                const numero2 = parseInt(document.getElementById("numero2").value);
+                if (numero1 > numero2) {
+                    const suma = numero1 + numero2;
+                    const diferencia = numero1 - numero2;
+                    result = `La suma es ${suma} y la diferencia es ${diferencia}`;
+                } else {
+                    const mult = numero1 * numero2;
+                    const div = numero1 / numero2;
+                    result = `La multiplicacion es ${mult} y la division es ${div}`;
+                }
+            } else if (punto2.classList.contains("active")) {
+                const nota1 = parseFloat(document.getElementById("nota1").value);
+                const nota2 = parseFloat(document.getElementById("nota2").value);
+                const nota3 = parseFloat(document.getElementById("nota3").value);
+                const avg = (nota1 + nota2 + nota3) / 3;
+
+                result = avg >= 4 ? "Regular" : "Reprobado";
+            } else if (punto3.classList.contains("active")) {
+                const numero = parseInt(document.getElementById("numero3").value);
+                if (numero < 1 || numero > 99) {
+                    result = "El numero no es valido";
+                } else if (numero <= 9) {
+                    result = "El numero tiene 1 digito";
+                } else{
+                    result = "El numero tiene 2 digitos";
+                }
+            } else {
+                result = "No se ha seleccionado un punto.";
+            }
+            resultado.innerHTML = result;
+        });
+        const removeOtrosPuntos = function() {
+            const otrosPuntos = document.getElementsByClassName("punto-form");
+            for (const element of otrosPuntos) {
+                element.classList.remove("active");
+                element.classList.add("hidden");
+            }
+        }
+        const showPunto = function(punto) {
+            document.querySelector(`#${punto}`).classList.add("active");
+            document.querySelector(`#${punto}`).classList.remove("hidden");
+        }
+        document.querySelector("#btnPunto1").addEventListener("click", function(event){
+            removeOtrosPuntos();
+            showPunto("punto1");
+        });
+        document.querySelector("#btnPunto2").addEventListener("click", function(event){
+            removeOtrosPuntos();
+            showPunto("punto2");
+        });
+        document.querySelector("#btnPunto3").addEventListener("click", function(event){
+            removeOtrosPuntos();
+            showPunto("punto3");
+        });
+    </script>
+    <?php ?>
+</body>
+
+</html>
