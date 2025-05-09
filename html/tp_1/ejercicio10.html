@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio 11</title>
+    <title>Ejercicio 10</title>
     <link rel="stylesheet" href="static/src/main.css">
 </head>
 
 <body>
     <header>
-        <h1>Ejercicio 11</h1>
-        <h2>Estructuras switch.</h2>
+        <h1>Ejercicio 10</h1>
+        <h2>Operadores lógicos || (o) en las estructuras condicionales.</h2>
         <div class="navbar">
             <button id="btnPunto1" class="punto">Punto 1</button>
         </div>
@@ -19,16 +19,25 @@
     <div id="main">
         <div id="punto1" class="punto-form">
             <h3>Punto 1</h3>
-            <form action="ejercicio11.php" method="post">
+            <form action="ejercicio10.php" method="post">
                 <div>
-                    <label for="palabra">Ingrese una palabra:</label>
-                    <input type="text" name="palabra" id="palabra" required />
+                    <label for="numeroPunto1_1">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto1_1" id="numeroPunto1_1" required />
+                </div>
+                <div>
+                    <label for="numeroPunto1_2">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto1_2" id="numeroPunto1_2" required />
+                </div>
+                <div>
+                    <label for="numeroPunto1_3">Ingrese un numero:</label>
+                    <input type="number" name="numeroPunto1_3" id="numeroPunto1_3" required />
                 </div>
             </form>
         </div>
     </div>
     <footer>
         <button type="button" class="ResolveJS">Resolver con JS</button>
+        <!-- <input type="submit" class="ResolvePHP" value="Enviar"> -->
         <div id="resultado"></div>
     </footer>
     <script>
@@ -45,26 +54,13 @@
         };
 
         const resolvePunto1 = function () {
-            const palabra = document.querySelector("#palabra").value;
-            let resultado = "";
-            switch (palabra) {
-                case "casa":
-                    resultado = "house";
-                    break;
-                case "mesa":
-                    resultado = "table";
-                    break;
-                case "perro":
-                    resultado = "dog";
-                    break;
-                case "gato":
-                    resultado = "cat";
-                    break;
-                default:
-                    resultado = "No se reconoce la palabra ingresada.";
-            }
-            return resultado;
-            
+            const numero1 = parseInt(document.querySelector("#numeroPunto1_1").value);
+            const numero2 = parseInt(document.querySelector("#numeroPunto1_2").value);
+            const numero3 = parseInt(document.querySelector("#numeroPunto1_3").value);
+
+            return numero1 < 10 || numero2 < 10 || numero3 < 10
+                ? "Uno de los numeros es menor a 10"
+                : "Ninguno de los numeros es menor a 10";
         };
         document.querySelector(".ResolveJS").addEventListener("click", function (event) {
             resultado.innerHTML = ""; // Limpiar el resultado anterior
@@ -72,7 +68,6 @@
             resultado.innerHTML = result;
         });
     </script>
-    <?php ?>
 </body>
 
 </html>

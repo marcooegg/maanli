@@ -104,21 +104,5 @@
             punto1.classList.remove("active");
         });
     </script>
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nota1 = $_POST['nota1'];
-        $nota2 = $_POST['nota2'];
-        $nota3 = $_POST['nota3'];
-
-        // Validar que las notas estén en el rango de 0 a 10
-        if ($nota1 < 0 || $nota1 > 10 || $nota2 < 0 || $nota2 > 10 || $nota3 < 0 || $nota3 > 10) {
-            echo "<p style='color: red;'>Las notas deben estar entre 0 y 10.</p>";
-        } else {
-            // Calcular el promedio
-            $promedio = ($nota1 + $nota2 + $nota3) / 3;
-            echo "<p>El promedio es: " . number_format($promedio, 2) . "<br>" . ($promedio >= 6 ? 'Aprobado' : 'Desaprobado') . "</p>";
-        }
-    }
-    ?>
 </body>
 </html>
