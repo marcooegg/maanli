@@ -19,7 +19,7 @@
     <div id="main">
         <div id="punto1" class="punto-form">
             <h3>Punto 1</h3>
-            <form action="ejercicio8.php" method="post">
+            <form action="ejercicio10.php" method="post">
                 <div>
                     <label for="numeroPunto1_1">Ingrese un numero:</label>
                     <input type="number" name="numeroPunto1_1" id="numeroPunto1_1" required />

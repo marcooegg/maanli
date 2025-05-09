@@ -19,7 +19,7 @@
     <div id="main">
         <div id="punto1" class="punto-form">
             <h3>Punto 1</h3>
-            <form action="ejercicio8.php" method="post">
+            <form action="ejercicio11.php" method="post">
                 <div>
                     <label for="palabra">Ingrese una palabra:</label>
                     <input type="text" name="palabra" id="palabra" required />

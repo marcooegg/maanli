@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 14</title>
+    <link rel="stylesheet" href="static/src/main.css">
+</head>
+
+<body>
+    <header>
+        <h1>Ejercicio 14</h1>
+        <h2>Estructura repetitiva (do/while)</h2>
+        <div class="navbar">
+            <button id="btnPunto1" class="punto">Punto 1</button>
+            <button id="btnPunto2" class="punto">Punto 2</button>
+            <button id="btnPunto3" class="punto">Punto 3</button>
+        </div>
+    </header>
+    <div id="main">
+        <div id="punto1" class="punto-form hidden">
+        </div>
+        <div id="punto2" class="punto-form hidden">
+        </div>
+        <div id="punto3" class="punto-form hidden">
+        </div>
+    </div>
+    <footer>
+        <button type="button" class="ResolveJS">Resolver con JS</button>
+        <div id="resultado"></div>
+    </footer>
+    <script>
+        const punto1 = document.querySelector("#punto1");
+        const punto2 = document.querySelector("#punto2");
+        const punto3 = document.querySelector("#punto3");
+        const btnPunto1 = document.querySelector("#btnPunto1");
+        const btnPunto2 = document.querySelector("#btnPunto2");
+        const btnPunto3 = document.querySelector("#btnPunto3");
+        const resultado = document.querySelector("#resultado");
+
+        const removeOtrosPuntos = function() {
+            const otrosPuntos = document.getElementsByClassName("punto-form");
+            for (const element of otrosPuntos) {
+                element.classList.remove("active");
+                element.classList.add("hidden");
+            }
+        }
+        const showPunto = function(punto) {
+            document.querySelector(`#${punto}`).classList.add("active");
+            document.querySelector(`#${punto}`).classList.remove("hidden");
+        }
+
+        btnPunto1.addEventListener("click", () => {
+            removeOtrosPuntos();
+            resolvePunto1();
+        });
+
+        btnPunto2.addEventListener("click", () => {
+            removeOtrosPuntos();
+            resolvePunto2();
+        });
+
+        btnPunto3.addEventListener("click", () => {
+            removeOtrosPuntos();
+            resolvePunto3();
+        });
+
+        const resolvePunto1 = function() {
+            sum = 0;
+            do {
+                input = prompt("Ingrese un numero (9999 para salir):");
+                if (input !== null && input !== "9999") {
+                    if (isNaN(input)) {
+                        alert("Por favor, ingrese un número válido.");
+                        continue;
+                    }
+                    sum += parseInt(input);
+                }
+            } while (input != 9999);
+            resultado.innerHTML =  `La suma de los numeros ingresados es: ${(sum != 0) ? ((sum > 0) ? 'positivo':'negativo') : 'cero'}`;
+        };
+        
+        const resolvePunto2 = function() {
+            let nrocuenta;
+            let nombre;
+            let saldo = 0;
+            let saldoacre = 0;
+            let result = "";
+            do {
+                nrocuenta = parseInt(prompt('Ingrese nro de cuenta:'));
+                if (nrocuenta > 0) {
+                    nombre = prompt('Nombre del cliente:');
+                    saldo = parseFloat(prompt('Saldo actual:'));
+                    if (saldo > 0) {
+                        saldoacre = saldoacre + saldo;
+                        result += nombre + ' tiene saldo acreedor<br>';
+                    } else {
+                        if (saldo < 0) {
+                            result += nombre + ' tiene saldo deudor<br>';
+                        } else {
+                            result += nombre + ' tiene saldo nulo<br>';
+                        }
+                    }
+    
+                }
+            } while (nrocuenta > 0);
+            result += 'Suma total de saldos acreedores:' + saldoacre;
+            resultado.innerHTML = result;
+        };
+           
+        const resolvePunto3 = function() {
+            let result = "";
+            let totalPersonas = 0;
+            let totalHombres = 0;
+            let totalMujeres = 0;
+            let totalVaronesMayores = 0;
+            let nroDocumento = 0;
+            do {
+                nroDocumento = parseInt(prompt('Ingrese nro de documento:'));
+                if (nroDocumento > 0) {
+                    let nombre = prompt('Nombre:');
+                    let sexo = prompt('Sexo (M/F):').toUpperCase();
+                    let edad = parseInt(prompt('Edad:'));
+                    totalPersonas++;
+                    if (sexo === 'M') {
+                        totalHombres++;
+                        if (edad > 16 && edad < 65) {
+                            totalVaronesMayores++;
+                        }
+                    }
+                }
+            } while (nroDocumento > 0);
+            totalMujeres = totalPersonas - totalHombres;
+            result += 'Total de personas: ' + totalPersonas + '<br>';
+            result += 'Total de hombres: ' + totalHombres + '<br>';
+            result += 'Total de mujeres: ' + totalMujeres + '<br>';
+            result += 'Total de varones mayores de 16 y menores de 65: ' + totalVaronesMayores + '<br>';
+            resultado.innerHTML = result;
+        };
+
+
+        document.querySelector(".ResolveJS").addEventListener("click", function (event) {
+            resultado.innerHTML = ""; // Limpiar el resultado anterior
+            let result = "";
+            if (punto1.classList.contains("active")) {
+                result = resolvePunto1();
+            } else if (punto2.classList.contains("active")) {
+                result = resolvePunto2();
+            } else {
+                result = "No se ha seleccionado un punto.";
+            }
+            resultado.innerHTML = result;
+        });
+    </script>
+</body>
+
+</html>
