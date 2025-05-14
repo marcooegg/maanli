@@ -22,6 +22,9 @@
             <input type="text" id="nombreYApellido" name="nombreYApellido" required><br><br>
             <input type="submit" value="Enviar">
         </form>
+        <footer>
+            <button onclick="location.href='ejercicios_php.php'">Volver a Ejercicios PHP</button>
+        </footer>
     </div>
     <?php
         // leer el form y agregar al archivo padron.csv

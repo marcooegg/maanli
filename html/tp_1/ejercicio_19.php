@@ -58,5 +58,8 @@
     ?>
         
     </div>
+    <footer>
+        <button onclick="location.href='ejercicios_php.php'">Volver a Ejercicios PHP</button>
+    </footer>
 </body>
 </html>

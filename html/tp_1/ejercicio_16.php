@@ -11,8 +11,11 @@
     </header>
     <div id="main">
     <h2>Procesar datos del padron</h2>
-        
+    
     </div>
+    <footer>
+        <button onclick="location.href='ejercicios_php.php'">Volver a Ejercicios PHP</button>
+    </footer>
     <?php
         
         $file = fopen("padron.csv", "r");
