@@ -27,7 +27,7 @@
         $cantMecanicos = 0;
         $cantEmpleados = 0;
         $file = fopen("maestro_empleados.csv", "r");
-        echo "<h2>Padron de Empleados</h2>"
+        echo "<h2>Padron de Empleados</h2>";
         echo "<table border='1'>";
         echo "<tr><th>Cod. Empl</th><th>Nombre y Apellido</th><th>S. Basico</th><th>Observaciones</th></tr>";
         while (($data = fgetcsv($file)) !== FALSE) {
@@ -38,7 +38,7 @@
             $sumaSueldos += $sueldoBasico;
             $observaciones = $data[3];
 
-            if tipoEmpleado($observaciones) == "Mecanico" {
+            if (tipoEmpleado($observaciones) == "Mecanico") {
                 $sumaSueldosMecanico += $sueldoBasico;
                 $cantMecanicos++;
             }
@@ -51,9 +51,9 @@
             echo "</tr>";
         }
         fclose($file);
-        echo "<tr><td/><td>Total:</td><td>$sumaSueldos</td></tr>"
+        echo "<tr><td/><td>Total:</td><td>$sumaSueldos</td></tr>";
         echo "</table>";
-        echo "<p>El sueldo promedio es: ". ($sumaSueldos / $cantEmpleados) . "</p>"
+        echo "<p>El sueldo promedio es: ". ($sumaSueldos / $cantEmpleados) . "</p>";
         echo "<p>El sueldo promedio de los mecanicos es: " . ($sumaSueldosMecanico / $cantMecanicos) . "</p>";
     ?>
         
