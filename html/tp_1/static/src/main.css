@@ -29,7 +29,7 @@ body {
 }
 /* modern looking button */
 button, input[type="submit"] {
-    /* background-color: #4CAF50; Green */
+    background-color: #ddda2c;
     border: none;
     /* color: white; */
     padding: 15px 32px;
