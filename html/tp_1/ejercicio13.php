@@ -34,7 +34,7 @@
         $numeros[] = $_REQUEST['numero4'];
         $numeros[] = $_REQUEST['numero5'];
 
-        $min = 0;
+        $min = $numeros[0];
         $max = $numeros[0];
         foreach ($numeros as $num) {
             if ($num < $min) {

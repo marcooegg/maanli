@@ -8,7 +8,7 @@
 <body>
     <h1>Ejercicio 8</h1>
     <?php
-        for ($i = 100; $i <= 0; $i-=2) {
+        for ($i = 100; $i >= 0; $i-=2) {
             echo "$i<br/>";
         }
     ?>
