@@ -23,7 +23,9 @@
     // ej 3
         echo "La suma es " . ($A + $A1) . "<br/>";
     // ej 4
-        $A = $_
+        $A = $_REQUEST['numero1'];
+        $A1 = $_REQUEST['numero2'];
+        echo "La suma es " . ($A + $A1) . "<br/>";
     ?>
 </body>
 </html>
