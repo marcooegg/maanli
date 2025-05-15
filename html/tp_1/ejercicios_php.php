@@ -9,10 +9,9 @@
     <title>Ejercicios en PHP</title>
 </head>
 <body>
-    <h1>Ejercicios en PHP</h1>
-    <>
-        
-    <a href="ejercicios2-5.php">Ejercicio 2 al 5</a><br>
+    <h1>Ejercicios en PHP</h1>      
+    <p>  
+        <a href="ejercicios2-5.php">Ejercicio 2 al 5</a><br>
         <a href="ejercicio6.php">Ejercicio 6</a><br>
         <a href="ejercicio7.php">Ejercicio 7</a><br>
         <a href="ejercicio8.php">Ejercicio 8</a><br>
