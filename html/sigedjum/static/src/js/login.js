@@ -1,5 +1,5 @@
 const { createApp } = Vue;
-import axios from 'axios';
+// import axios from 'axios';
 createApp({
     data() {
         return {
