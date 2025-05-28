@@ -1,4 +1,5 @@
 <?php
+    require_once "db.php";
     $input = file_get_contents("php://input");
     $data = json_decode($input);
 
@@ -11,6 +12,11 @@
     // } else {
     //     echo json_encode(["success" => false, "message" => "Credenciales inválidas"]);
     // }
+
+    $query = $pdo->prepare("SELECT * FROM user WHERE login = :email");
+    $query->execute(['email' => $email])
+    res = $query->fetch(PDO::FETCH_ASOC)
+    echo "se encontro" . res
     echo json_encode(["email" => $email, "password" => $password]);
     
 ?>
