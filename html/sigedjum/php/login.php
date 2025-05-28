@@ -14,9 +14,9 @@
     // }
 
     $query = $pdo->prepare("SELECT * FROM user WHERE login = :email");
-    $query->execute(['email' => $email])
-    res = $query->fetch(PDO::FETCH_ASOC)
-    echo "se encontro" . res
+    $query->execute(['email' => $email]);
+    $res = $query->fetch(PDO::FETCH_ASOC);
+    echo "se encontro" . $res;
     echo json_encode(["email" => $email, "password" => $password]);
     
 ?>
