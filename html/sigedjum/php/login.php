@@ -10,9 +10,9 @@
     $password = $data->password ?? '';
 
     try {
-        $query = $pdo->prepare("SELECT * FROM user WHERE login = :email");
-        $query->execute(['email' => $email]);
-        $res = $query->fetch(PDO::FETCH_ASSOC);
+        $conn = new DataBaseConnection();
+        $query = "SELECT * FROM user WHERE login = :email";
+        $res = $conn->read($query, [":email" => $email]);
 
         echo $res
             ? json_encode(["success" => true, "message" => "Login correcto"])
