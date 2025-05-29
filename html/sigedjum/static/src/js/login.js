@@ -15,6 +15,7 @@ createApp({
                 password: this.password
             })
             .then(response => {
+                console.log('Response from server:', response.data);
                 if (response.data.success) {
                     // window.location.href = '/dashboard';
                     console.log('Login successful:', response.data);
