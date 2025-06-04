@@ -14,8 +14,9 @@
     </header>
     <div id="factura" class="container d-flex justify-content-center align-items-center">
         <form>
-            <div class="header">
-                <div class="align-items-left col-4" name="datos_empresa">
+            <div class="header d-flex">
+                <h1 class='text-center company-header'>Factura Electrónica</h1>
+                <div class="align-items-left col-6" name="datos_empresa">
                     <?php
                     require_once "php/db.php";
                     $conn = new DataBaseConnection();
@@ -23,7 +24,7 @@
                     $empresa = $conn->read($query);
                     if ($empresa) {
                         $empresa = $empresa[0];
-                        echo "<h1 class='text-center company-header'>Factura Electrónica</h1>";
+                        echo "";
                         echo "<p class='text-center company-header'>Nombre: {$empresa['nombre']}</p>";
                         echo "<p class='text-center company-header'>CUIT: {$empresa['nip']}</p>";
                         echo "<p class='text-center company-header'>Domicilio: {$empresa['direccion']}</p>";
@@ -32,7 +33,7 @@
                     }
                 ?>
                 </div>
-                <div class="align-items-right col-4" name="datos_factura">
+                <div class="align-items-right col-6" name="datos_factura">
                     <table>
                         <tr>
                             <td><label for="numero_factura">Número de Factura: 0001 - </label></td>
@@ -104,6 +105,10 @@
                             <input type="number" class="form-control" v-model="nuevaLinea.subtotal" required readonly>
                         </td>
                     </tr>`;
+        const agregarLinea = () => {
+                    const tableBody = document.querySelector('#table_body');
+                    tableBody.insertAdjacentHTML('beforeend', template);
+                }
         const app = Vue.createApp({
             data() {
                 return {
