@@ -10,7 +10,7 @@
     class DataBaseConnection {
         public $pdo;
 
-        public function __construct($host = "localhost", $port = "2092", $user = "c2821127_trprac", $pass = "PUnuru87fi", $name = "c2821127_trprac", $charset = "utf8mb4") {
+        public function __construct($host = "localhost", $port = "2092", $user = "c2821127_trprac", $pass = "ti38LUpali", $name = "c2821127_trprac", $charset = "utf8mb4") {
             try {
                 $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$name;charset=$charset", $user, $pass);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
