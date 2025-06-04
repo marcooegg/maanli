@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Example</title>
+</head>
+<body>
+    <h1>Lista de Usuarios</h1>
+    <ul id="user-list"></ul>
+
+    <!-- Definición del template -->
+    <template id="user-template">
+        <li class="user-item">
+            <span class="user-name"></span>
+        </li>
+    </template>
+
+    <script>
+        // Datos de ejemplo
+        const users = ['Alice', 'Bob', 'Charlie'];
+
+        // Referencias al template y al contenedor
+        const template = document.getElementById('user-template');
+        const userList = document.getElementById('user-list');
+
+        // Clonar y usar el contenido del template
+        users.forEach(user => {
+            const clone = template.content.cloneNode(true);
+            clone.querySelector('.user-name').textContent = user;
+            userList.appendChild(clone);
+        });
+    </script>
+</body>
+</html>

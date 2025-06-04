@@ -1,0 +1,39 @@
+/* 
+colores:
+principal #018080
+sec = #B97039
+ter = #D6B170
+*/
+/* :root {
+    --color-principal: #018080;
+    --color-secundario: #B97039;
+    --color-terciario: #D6B170;
+}
+.primary-color {
+    color: var(--color-principal);
+}
+.secondary-color {
+    color: var(--color-secundario);
+}
+.tertiary-color {
+    color: var(--color-terciario);
+} */
+
+.bg-primary {
+    background-color: #018080!important;
+    color: white;
+}
+
+/* background-color: var(--color-principal); */
+.btn-primary {
+    background-color: #018080;
+    color: white;
+}
+/* .button-secondary {
+    background-color: var(--color-secundario);
+    color: white;
+}
+.button-tertiary {
+    background-color: var(--color-terciario);
+    color: white;
+} */
