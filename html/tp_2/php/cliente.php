@@ -25,6 +25,8 @@
     $data = json_decode($input);
 
     $cuit = $data->cuit ?? '';
+    echo $cuit;
+    echo json_encode($data);
 
     try {
         $conn = new DataBaseConnection();
