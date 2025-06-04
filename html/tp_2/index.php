@@ -15,7 +15,7 @@
     <div id="factura" class="container d-flex justify-content-center align-items-center">
         <form>
             <div class="header">
-                <div class="align-items-left" name="datos_empresa">
+                <div class="align-items-left col-4" name="datos_empresa">
                     <?php
                     require_once "php/db.php";
                     $conn = new DataBaseConnection();
@@ -23,23 +23,20 @@
                     $empresa = $conn->read($query);
                     if ($empresa) {
                         $empresa = $empresa[0];
-                        echo "<h1 class='text-center'>Factura Electrónica</h1>";
-                        echo "<p class='text-center'>Nombre: {$empresa['nombre']}</p>";
-                        echo "<p class='text-center'>CUIT: {$empresa['nip']}</p>";
-                        echo "<p class='text-center'>Domicilio: {$empresa['direccion']}</p>";
+                        echo "<h1 class='text-center company-header'>Factura Electrónica</h1>";
+                        echo "<p class='text-center company-header'>Nombre: {$empresa['nombre']}</p>";
+                        echo "<p class='text-center company-header'>CUIT: {$empresa['nip']}</p>";
+                        echo "<p class='text-center company-header'>Domicilio: {$empresa['direccion']}</p>";
                     } else {
-                        echo "<p class='text-center'>Datos de la empresa no encontrados.</p>";
+                        echo "<p class='text-center company-header'>Datos de la empresa no encontrados.</p>";
                     }
                 ?>
                 </div>
-                <div class="align-items-right" name="datos_factura">
-                    <!-- <h2 class="text-center">Crear Factura</h2> -->
+                <div class="align-items-right col-4" name="datos_factura">
                     <table>
                         <tr>
                             <td><label for="numero_factura">Número de Factura: 0001 - </label></td>
-                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required>
-                            <?php echo "1" ?>
-                            </td>
+                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required></td>
                         </tr>
                         <tr>
                             <td><label for="fecha">Fecha:</label></td>
