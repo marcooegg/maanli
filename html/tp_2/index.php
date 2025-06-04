@@ -22,7 +22,7 @@
                     $conn = new DataBaseConnection();
                     $query = "SELECT * FROM persona WHERE id = ?";
                     $params = [1]; // Asumiendo que la empresa es la primera persona en la base de datos
-                    $empresa = $conn->read($query);
+                    $empresa = $conn->read($query,$params);
                     if ($empresa) {
                         $empresa = $empresa[0];
                         echo "";
