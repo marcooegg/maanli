@@ -126,10 +126,12 @@
             const cuitInput = document.querySelector("#cuit_cliente");
             const cuit = cuitInput.value;
             if (cuit) {
-                axios.get(`php/cliente.php?cuit=${cuit}`)
+                axios.get(`php/cliente.php`, {
+                        params: { cuit: cuit }
+                    })
                     .then(response => {
                         if (response.data.success) {
-                            escribirDatosCliente(response.data.cliente);
+                            escribirDatosCliente(response.data.result);
                         } else {
                             alert("Cliente no encontrado.");
                         }
