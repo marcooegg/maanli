@@ -59,7 +59,9 @@
             <div class="form-group">
                 <label for="cuit_cliente">CUIT/DNI:</label>
                 <input type="text" class="form-control" id="cuit_cliente" v-model="cuit_cliente" required>
-                
+                <button type="button" class="btn btn-secondary mt-2" @click="buscarCliente" id="btnSearchClient">Buscar Cliente</button>
+            </div>
+            <div id="datosCliente" class="form-group mt-3">
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-primary" @click="agregarLinea" id="btnAddLine">Agregar Línea</button>
@@ -91,7 +93,7 @@
     <footer class="bg-primary text-center py-3">
     </footer>
     <script>
-        const template = `<tr>
+        const templateLinea = `<tr>
                         <td>
                             <input type="number" class="form-control" v-model="nuevaLinea.cantidad" required>
                         </td>
@@ -107,9 +109,38 @@
                     </tr>`;
         const agregarLinea = () => {
                     const tableBody = document.querySelector('#table_body');
-                    tableBody.insertAdjacentHTML('beforeend', template);
-                }
+                    tableBody.insertAdjacentHTML('beforeend', templateLinea);
+                };
+                
         document.querySelector("#btnAddLine").addEventListener("click", agregarLinea);
+        
+        const escribirDatosCliente = (cliente) => {
+            document.querySelector("#datosCliente").innerHTML = 
+                `<p class='text-center company-header'>Nombre: ${cliente.nombre}</p>
+                <p class='text-center company-header'>CUIT: ${cliente.nip}</p>
+                <p class='text-center company-header'>Domicilio: ${cliente.direccion}</p>`;
+        };
+
+        document.querySelector("#btnSearchClient").addEventListener("click", function() {
+            const cuitInput = document.querySelector("#cuit_cliente");
+            const cuit = cuitInput.value;
+            if (cuit) {
+                axios.get(`php/cliente.php?cuit=${cuit}`)
+                    .then(response => {
+                        if (response.data.success) {
+                            escribirDatosCliente(response.data.cliente);
+                        } else {
+                            alert("Cliente no encontrado.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error al buscar el cliente:", error);
+                        alert("Error al buscar el cliente.");
+                    });
+            } else {
+                alert("Por favor, ingrese un CUIT/DNI.");
+            }
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
