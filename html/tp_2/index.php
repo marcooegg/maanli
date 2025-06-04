@@ -36,8 +36,20 @@
                     <!-- <h2 class="text-center">Crear Factura</h2> -->
                     <table>
                         <tr>
-                            <td><label for="numero_factura">Número de Factura:</label></td>
-                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required></td>
+                            <td><label for="numero_factura">Número de Factura: 0001 - </label></td>
+                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required>
+                        <?php
+                            // Generar número de factura automáticamente
+                            $query = "SELECT MAX(numero_factura) AS max_num FROM factura";
+                            $result = $conn->read($query);
+                            $result = $result ? $result[0]['max_num'] + 1 : 1;
+                            $result = str_pad($result, 8, '0', STR_PAD_LEFT);
+                            echo $result
+                            // $numero_factura = $result ? $result[0]['max_num'] + 1 : 1;
+                            // echo "<script>document.getElementById('numero_factura').value = '$numero_factura';</script>";
+                        ?>
+                        
+                        </td>
                         </tr>
                         <tr>
                             <td><label for="fecha">Fecha:</label></td>
