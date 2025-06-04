@@ -44,9 +44,9 @@
                             $result = $conn->read($query);
                             $result = $result ? $result[0]['max_num'] + 1 : 1;
                             $result = str_pad($result, 8, '0', STR_PAD_LEFT);
-                            echo $result
+                            // echo $result
                             // $numero_factura = $result ? $result[0]['max_num'] + 1 : 1;
-                            // echo "<script>document.getElementById('numero_factura').value = '$numero_factura';</script>";
+                            echo "<script>document.getElementById('numero_factura').value = '$numero_factura';</script>";
                         ?>
                         
                         </td>
