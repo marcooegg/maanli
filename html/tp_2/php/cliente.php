@@ -24,7 +24,7 @@
     $input = file_get_contents("php://input");
     $data = json_decode($input);
 
-    $email = $data->cuit ?? '';
+    $cuit = $data->cuit ?? '';
 
     try {
         $conn = new DataBaseConnection();
