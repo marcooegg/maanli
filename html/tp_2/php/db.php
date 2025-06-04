@@ -29,6 +29,7 @@
         public function read($query, $params = [], $fetchMode = PDO::FETCH_ASSOC) {
             $stmt = $this->pdo->prepare($query);
             $stmt->execute($params);
+            $this->closeConnection();
             return $stmt->fetchAll($fetchMode);
         }
     }
