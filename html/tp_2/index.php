@@ -25,8 +25,8 @@
                         $empresa = $empresa[0];
                         echo "<h1 class='text-center'>Factura Electrónica</h1>";
                         echo "<p class='text-center'>Nombre: {$empresa['nombre']}</p>";
-                        echo "<p class='text-center'>CUIT: {$empresa['cuit']}</p>";
-                        echo "<p class='text-center'>Domicilio: {$empresa['domicilio']}</p>";
+                        echo "<p class='text-center'>CUIT: {$empresa['nip']}</p>";
+                        echo "<p class='text-center'>Domicilio: {$empresa['direccion']}</p>";
                     } else {
                         echo "<p class='text-center'>Datos de la empresa no encontrados.</p>";
                     }
@@ -37,7 +37,9 @@
                     <table>
                         <tr>
                             <td><label for="numero_factura">Número de Factura: 0001 - </label></td>
-                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required></td>
+                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required>
+                            <?php echo "1" ?>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="fecha">Fecha:</label></td>
