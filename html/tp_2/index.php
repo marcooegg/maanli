@@ -73,20 +73,6 @@
                         <th>Precio Unitario</th>
                         <th>Subtotal</th>
                     </tr>
-                    <tr id='linea_1'>
-                        <td>
-                            <input type="number" class="form-control cantidad" id='cantidad_1' required>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" required>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control precio" id='precio_1' required>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id='subtotal_1' required readonly>
-                        </td>
-                    </tr>
                 </table>
             </div>
         </form>
