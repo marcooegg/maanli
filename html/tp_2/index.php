@@ -6,7 +6,6 @@
     <title>Crear Factura</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/src/css/styles.css" rel="stylesheet" >
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.0/dist/vue.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -38,16 +37,16 @@
                     <table>
                         <tr>
                             <td><label for="numero_factura">Número de Factura: 0001 - </label></td>
-                            <td><input type="text" class="form-control" id="numero_factura" v-model="numero_factura" required></td>
+                            <td><input type="text" class="form-control" id="numero_factura" required></td>
                         </tr>
                         <tr>
                             <td><label for="fecha">Fecha:</label></td>
-                            <td><input type="date" class="form-control" id="fecha" v-model="fecha" required></td>
+                            <td><input type="date" class="form-control" id="fecha" required></td>
                         </tr>
                         <tr>
                             <td><label for="condicion_venta">Condición de Venta:</label></td>
                             <td>
-                                <select class="form-select" id="condicion_venta" v-model="condicion_venta" required>
+                                <select class="form-select" id="condicion_venta" required>
                                     <option value="" disabled selected>Seleccione una opción</option>
                                     <option value="Contado">Contado</option>
                                     <option value="Crédito">Crédito</option>
@@ -59,13 +58,13 @@
             </div>
             <div class="form-group">
                 <label for="cuit_cliente">CUIT/DNI:</label>
-                <input type="text" class="form-control" id="cuit_cliente" v-model="cuit_cliente" required>
-                <button type="button" class="btn btn-secondary mt-2" @click="buscarCliente" id="btnSearchClient">Buscar Cliente</button>
+                <input type="text" class="form-control" id="cuit_cliente" required>
+                <button type="button" class="btn btn-secondary mt-2" id="btnSearchClient">Buscar Cliente</button>
             </div>
             <div id="datosCliente" class="form-group mt-3">
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-primary" @click="agregarLinea" id="btnAddLine">Agregar Línea</button>
+                <button type="button" class="btn btn-primary" id="btnAddLine">Agregar Línea</button>
                 <table class="table table-bordered mt-3" id="table_body">
                     <tr id="table_head">
                         <th>Cant</th>
@@ -80,40 +79,47 @@
     <footer class="bg-primary text-center py-3">
     </footer>
     <script>
-        
-        
-
         var cantLineas = 1;            
         const agregarLinea = () => {
-                const tableBody = document.querySelector('#table_body');
-                const templateLinea = `<tr id='linea_${cantLineas}'>
-                        <td>
-                            <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" required>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control precio" id='precio_${cantLineas}' required>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id='subtotal_${cantLineas}' required readonly>
-                        </td>
-                    </tr>`;
-                tableBody.insertAdjacentHTML('beforeend', templateLinea);
-                document.querySelector(`#cantidad_${cantLineas}`).addEventListener('input', function() {
-                    const cantidad = parseFloat(this.value) || 0;
-                    const precio = parseFloat(document.querySelector(`#precio_${cantLineas}`).value) || 0;
-                    document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
-                });
-                document.querySelector(`#precio_${cantLineas}`).addEventListener('input', function() {
-                    const precio = parseFloat(this.value) || 0;
-                    const cantidad = parseFloat(document.querySelector(`#cantidad_${cantLineas}`).value) || 0;
-                    document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
-                });
-                cantLineas++;
-
-            };
+            const tableBody = document.querySelector('#table_body');
+            const templateLinea = `<tr id='linea_${cantLineas}'>
+                    <td>
+                        <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" required>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control precio" id='precio_${cantLineas}' required>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id='subtotal_${cantLineas}' required readonly>
+                    </td>
+                </tr>`;
+            tableBody.insertAdjacentHTML('beforeend', templateLinea);
+            document.querySelector(`#cantidad_${cantLineas}`).addEventListener('input', function() {
+                const cantidad = parseFloat(this.value) || 0;
+                console.log(this.value);
+                console.log(cantLineas);
+                console.log(`#precio_${cantLineas}`);
+                console.log(document.querySelector(`#precio_${cantLineas}`));
+                const precio = parseFloat(document.querySelector(`#precio_${cantLineas}`).value) || 0;
+                document.querySelector(`#subtotal_${cantLineas}`)?.value = (cantidad * precio).toFixed(2);
+            });
+            document.querySelector(`#precio_${cantLineas}`).addEventListener('input', function() {
+                const precio = parseFloat(this.value) || 0;
+                console.log(this.value);
+                console.log(cantLineas);
+                console.log(`#cantidad_${cantLineas}`);
+                console.log(document.querySelector(`#cantidad_${cantLineas}`));
+                const cantidadId = `#cantidad_${cantLineas}`;
+                console.log(cantidadId);
+                const cantidad = parseFloat(document.querySelector(cantidadId)?.value) || 0;
+                // const cantidad = parseFloat(document.querySelector(`#cantidad_${cantLineas}`).value) || 0;
+                document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
+            });
+            cantLineas++;
+        };
                 
         document.querySelector("#btnAddLine").addEventListener("click", agregarLinea);
         
@@ -146,8 +152,6 @@
                 alert("Por favor, ingrese un CUIT/DNI.");
             }
         });
-
-
 
         agregarLinea(); // Agregar la primera línea al cargar la página
     </script>
