@@ -9,7 +9,7 @@
     try {
         $conn = new DataBaseConnection();
         $query = "SELECT * FROM producto WHERE descripcion LIKE :descripcion";
-        $res = $conn->read($query, [":descripcion" => "'%" . $descripcion ."%'"]);
+        $res = $conn->read($query, [":descripcion" => "%" . $descripcion ."%"]);
 
         echo $res
             ? json_encode(["success" => true, "message" => $res])
