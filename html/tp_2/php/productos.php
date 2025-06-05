@@ -8,7 +8,7 @@
 
     try {
         $conn = new DataBaseConnection();
-        $query = "SELECT * FROM product WHERE descripcion = :descripcion";
+        $query = "SELECT * FROM producto WHERE descripcion = :descripcion";
         $res = $conn->read($query, [":descripcion" => $descripcion]);
 
         echo $res
