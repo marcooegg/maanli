@@ -104,7 +104,7 @@
                 console.log(`#precio_${cantLineas}`);
                 console.log(document.querySelector(`#precio_${cantLineas}`));
                 const precio = parseFloat(document.querySelector(`#precio_${cantLineas}`).value) || 0;
-                document.querySelector(`#subtotal_${cantLineas}`)?.value = (cantidad * precio).toFixed(2);
+                document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
             });
             document.querySelector(`#precio_${cantLineas}`).addEventListener('input', function() {
                 const precio = parseFloat(this.value) || 0;
@@ -114,7 +114,7 @@
                 console.log(document.querySelector(`#cantidad_${cantLineas}`));
                 const cantidadId = `#cantidad_${cantLineas}`;
                 console.log(cantidadId);
-                const cantidad = parseFloat(document.querySelector(cantidadId)?.value) || 0;
+                const cantidad = parseFloat(document.querySelector(cantidadId).value) || 0;
                 // const cantidad = parseFloat(document.querySelector(`#cantidad_${cantLineas}`).value) || 0;
                 document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
             });
