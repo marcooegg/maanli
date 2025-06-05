@@ -77,6 +77,10 @@
         </form>
     </div>
     <footer class="bg-primary text-center py-3">
+    <div class="oe_button_box" name="button_box">
+        <button class="oe_stat_button btn btn-primary" id="btnCrearFactura">Crear Factura</button>
+        </button>
+    </div>
     </footer>
     <script>
         var cantLineas = 1;            
@@ -100,11 +104,6 @@
             document.querySelector(`#cantidad_${cantLineas}`).addEventListener('input', function() {
                 const cantidad = parseFloat(this.value) || 0;
                 const currentCantLineas = this.id.split('_')[1]; // Obtener el número de línea actual
-                console.log(`Cantidad: ${cantidad}, Cantidad de líneas: ${cantLineas}`);
-                console.log(this.value);
-                console.log(cantLineas);
-                console.log(`#precio_${cantLineas}`);
-                console.log(document.querySelector(`#precio_${cantLineas}`));
                 const precio = parseFloat(document.querySelector(`#precio_${currentCantLineas}`).value) || 0;
                 document.querySelector(`#subtotal_${currentCantLineas}`).value = (cantidad * precio).toFixed(2);
             });
@@ -148,6 +147,55 @@
                 alert("Por favor, ingrese un CUIT/DNI.");
             }
         });
+
+        const crearFactura = () => {
+            const numeroFactura = document.querySelector("#numero_factura").value;
+            const fecha = document.querySelector("#fecha").value;
+            const condicionVenta = document.querySelector("#condicion_venta").value;
+            const cuitCliente = document.querySelector("#cuit_cliente").value;
+
+            if (!numeroFactura || !fecha || !condicionVenta || !cuitCliente) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            const lineas = [];
+            for (let i = 1; i < cantLineas; i++) {
+                const cantidad = parseFloat(document.querySelector(`#cantidad_${i}`).value) || 0;
+                const descripcion = document.querySelector(`#linea_${i} input[type="text"]`).value;
+                const precio = parseFloat(document.querySelector(`#precio_${i}`).value) || 0;
+                const subtotal = parseFloat(document.querySelector(`#subtotal_${i}`).value) || 0;
+
+                if (cantidad && descripcion && precio && subtotal) {
+                    lineas.push({ cantidad, descripcion, precio, subtotal });
+                }
+            }
+
+            if (lineas.length === 0) {
+                alert("Debe agregar al menos una línea a la factura.");
+                return;
+            }
+
+            axios.post('php/crear_factura.php', {
+                    numeroFactura,
+                    fecha,
+                    condicionVenta,
+                    cuitCliente,
+                    lineas
+                })
+                .then(response => {
+                    if (response.data.success) {
+                        alert("Factura creada exitosamente.");
+                        window.location.reload(); // Recargar la página para limpiar el formulario
+                    } else {
+                        alert("Error al crear la factura: " + response.data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al crear la factura:", error);
+                    alert("Error al crear la factura.");
+                });
+        };
 
         agregarLinea(); // Agregar la primera línea al cargar la página
     </script>

@@ -32,6 +32,13 @@
             $this->closeConnection();
             return $stmt->fetchAll($fetchMode);
         }
+
+        public function write($query, $params = []) {
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute($params);
+            $this->closeConnection();
+            return $stmt->rowCount();
+        }
     }
     // try {
     //     $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4", $DB_USER, $DB_PASS);
