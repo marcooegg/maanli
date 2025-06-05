@@ -99,24 +99,20 @@
             tableBody.insertAdjacentHTML('beforeend', templateLinea);
             document.querySelector(`#cantidad_${cantLineas}`).addEventListener('input', function() {
                 const cantidad = parseFloat(this.value) || 0;
+                const currentCantLineas = this.id.split('_')[1]; // Obtener el número de línea actual
+                console.log(`Cantidad: ${cantidad}, Cantidad de líneas: ${cantLineas}`);
                 console.log(this.value);
                 console.log(cantLineas);
                 console.log(`#precio_${cantLineas}`);
                 console.log(document.querySelector(`#precio_${cantLineas}`));
-                const precio = parseFloat(document.querySelector(`#precio_${cantLineas}`).value) || 0;
-                document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
+                const precio = parseFloat(document.querySelector(`#precio_${currentCantLineas}`).value) || 0;
+                document.querySelector(`#subtotal_${currentCantLineas}`).value = (cantidad * precio).toFixed(2);
             });
             document.querySelector(`#precio_${cantLineas}`).addEventListener('input', function() {
                 const precio = parseFloat(this.value) || 0;
-                console.log(this.value);
-                console.log(cantLineas);
-                console.log(`#cantidad_${cantLineas}`);
-                console.log(document.querySelector(`#cantidad_${cantLineas}`));
-                const cantidadId = `#cantidad_${cantLineas}`;
-                console.log(cantidadId);
-                const cantidad = parseFloat(document.querySelector(cantidadId).value) || 0;
-                // const cantidad = parseFloat(document.querySelector(`#cantidad_${cantLineas}`).value) || 0;
-                document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
+                const currentCantLineas = this.id.split('_')[1];
+                const cantidad = parseFloat(document.querySelector(`#cantidad_${currentCantLineas}`).value) || 0;
+                document.querySelector(`#subtotal_${currentCantLineas}`).value = (cantidad * precio).toFixed(2);
             });
             cantLineas++;
         };
