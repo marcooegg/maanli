@@ -21,13 +21,13 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     require_once "db.php";
-    $input = file_get_contents("php://input");
-    $data = json_decode($input);
+    // $input = file_get_contents("php://input");
+    // $data = json_decode($input);
 
-    $cuit = $data->cuit ?? '';
-    echo $cuit;
-    echo json_encode($data);
-
+    // $cuit = $data->cuit ?? '';
+    // echo $cuit;
+    // echo json_encode($data);
+    $cuit = $_GET['cuit'] ?? '';
     try {
         $conn = new DataBaseConnection();
         $query = "SELECT * FROM persona WHERE nip = :cuit";
