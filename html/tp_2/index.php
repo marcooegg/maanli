@@ -73,20 +73,20 @@
                         <th>Precio Unitario</th>
                         <th>Subtotal</th>
                     </tr>
-                    <tr>
+                    <tr id='linea_1'>
                         <td>
-                            <input type="number" class="form-control" v-model="nuevaLinea.cantidad" required>
+                            <input type="number" class="form-control cantidad" id='cantidad_1' required>
                         </td>
                         <td>
-                            <input type="text" class="form-control" v-model="nuevaLinea.descripcion" required>
+                            <input type="text" class="form-control" required>
                         </td>
                         <td>
-                            <input type="number" class="form-control" v-model="nuevaLinea.precio_unitario" required>
+                            <input type="number" class="form-control precio" id='precio_1' required>
                         </td>
                         <td>
-                            <input type="number" class="form-control" v-model="nuevaLinea.subtotal" required readonly>
+                            <input type="number" class="form-control" id='subtotal_1' required readonly>
                         </td>
-                    </tr>    
+                    </tr>
                 </table>
             </div>
         </form>
@@ -94,24 +94,40 @@
     <footer class="bg-primary text-center py-3">
     </footer>
     <script>
-        const templateLinea = `<tr>
+        
+        
+
+        var cantLineas = 1;            
+        const agregarLinea = () => {
+                const tableBody = document.querySelector('#table_body');
+                const templateLinea = `<tr id='linea_${cantLineas}'>
                         <td>
-                            <input type="number" class="form-control" v-model="nuevaLinea.cantidad" required>
+                            <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
                         </td>
                         <td>
-                            <input type="text" class="form-control" v-model="nuevaLinea.descripcion" required>
+                            <input type="text" class="form-control" required>
                         </td>
                         <td>
-                            <input type="number" class="form-control" v-model="nuevaLinea.precio_unitario" required>
+                            <input type="number" class="form-control precio" id='precio_${cantLineas}' required>
                         </td>
                         <td>
-                            <input type="number" class="form-control" v-model="nuevaLinea.subtotal" required readonly>
+                            <input type="number" class="form-control" id='subtotal_${cantLineas}' required readonly>
                         </td>
                     </tr>`;
-        const agregarLinea = () => {
-                    const tableBody = document.querySelector('#table_body');
-                    tableBody.insertAdjacentHTML('beforeend', templateLinea);
-                };
+                tableBody.insertAdjacentHTML('beforeend', templateLinea);
+                document.querySelector(`#cantidad_${cantLineas}`).addEventListener('input', function() {
+                    const cantidad = parseFloat(this.value) || 0;
+                    const precio = parseFloat(document.querySelector(`#precio_${cantLineas}`).value) || 0;
+                    document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
+                });
+                document.querySelector(`#precio_${cantLineas}`).addEventListener('input', function() {
+                    const precio = parseFloat(this.value) || 0;
+                    const cantidad = parseFloat(document.querySelector(`#cantidad_${cantLineas}`).value) || 0;
+                    document.querySelector(`#subtotal_${cantLineas}`).value = (cantidad * precio).toFixed(2);
+                });
+                cantLineas++;
+
+            };
                 
         document.querySelector("#btnAddLine").addEventListener("click", agregarLinea);
         
@@ -144,6 +160,10 @@
                 alert("Por favor, ingrese un CUIT/DNI.");
             }
         });
+
+
+
+        agregarLinea(); // Agregar la primera línea al cargar la página
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
