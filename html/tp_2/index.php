@@ -91,7 +91,11 @@
                         <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
                     </td>
                     <td>
-                        <input type="text" class="form-control" required>
+                        <input type="text" class="form-control product-id" id='product_id_${cantLineas}' required>
+                        <select class="form-select" id='descripcion_${cantLineas}' required>
+                            <option value="" disabled selected>Seleccione un producto</option>
+                            <!-- Aquí podrías agregar opciones dinámicamente si tienes una lista de productos -->
+                        </select>
                     </td>
                     <td>
                         <input type="number" class="form-control precio" id='precio_${cantLineas}' required>
@@ -113,6 +117,26 @@
                 const cantidad = parseFloat(document.querySelector(`#cantidad_${currentCantLineas}`).value) || 0;
                 document.querySelector(`#subtotal_${currentCantLineas}`).value = (cantidad * precio).toFixed(2);
             });
+            document.querySelector(`#product_id_${cantLineas}`).addEventListener('input', function() {
+                const descripcion = this.value;
+                const currentCantLineas = this.id.split('_')[1];
+                options = axios.get('php/productos.php', {
+                        params: { descripcion: descripcion }
+                    })
+                    .then(response => {
+                        const productos = response.data;
+                        const select = document.querySelector(`#descripcion_${currentCantLineas}`);
+                        select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
+                        productos.forEach(producto => {
+                            select.innerHTML += `<option value="${producto.id}">${producto.descripcion}</option>`;
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar los productos:", error);
+                    });
+                document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
+            });
+
             cantLineas++;
         };
                 
@@ -177,11 +201,11 @@
             }
 
             axios.post('php/crear_factura.php', {
-                    numeroFactura,
-                    fecha,
-                    condicionVenta,
-                    cuitCliente,
-                    lineas
+                    numeroFactura : numeroFactura,
+                    fecha: fecha,
+                    condicionVenta: condicionVenta,
+                    cuitCliente: cuitCliente,
+                    lineas: lineas
                 })
                 .then(response => {
                     if (response.data.success) {

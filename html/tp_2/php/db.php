@@ -1,12 +1,7 @@
 <?php
-    // require_once '../env/secret.php';
-    // $DB_HOST = 'c282.ferozo.com';
-    // $DB_HOST = "localhost";
-    // $DB_PORT = '2092';
-    // $DB_USER = 'c2821127_JURI_01';
-    // $DB_PASS = 'PUnuru87fi';
-    // $DB_NAME = 'c2821127_JURI_01';
-    // $DB_CHARSET = 'utf8mb4';
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     class DataBaseConnection {
         public $pdo;
 
@@ -34,10 +29,11 @@
         }
 
         public function write($query, $params = []) {
+            $query = $query . "RETURNING id"; // Assuming you want to return the last inserted ID
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute($params);
+            $res = $stmt->execute($params);
             $this->closeConnection();
-            return $stmt->rowCount();
+            return $res;
         }
     }
     // try {
