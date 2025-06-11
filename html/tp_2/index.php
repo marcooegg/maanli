@@ -124,7 +124,7 @@
                     })
                     .then(response => {
                         const productos = response.data;
-                        console.log(this.id.split('_')[1])
+                        console.log(this.id.split('_')[2])
                         const select = document.querySelector(`#descripcion_${this.id.split('_')[1]}`);
                         select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
                         productos.forEach(producto => {
