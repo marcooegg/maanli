@@ -118,15 +118,15 @@
             });
             // document.querySelector(`#product_id_${cantLineas}`).addEventListener('input', function() {
             // const descripcion = this.value;
+            // const currentCantLineas = this.id.split('_')[2];
             const descripcion = "";
-            const currentCantLineas = this.id.split('_')[2];
+            const currentCantLineas = cantLineas;
             console.log(currentCantLineas)
             options = axios.get('php/productos.php', {
                     params: { descripcion: descripcion }
                 })
                 .then(response => {
                     const productos = response.data.message;
-                    console.log(this.id.split('_')[2])
                     const select = document.querySelector(`#descripcion_${currentCantLineas}`);
                     select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
                     for (const producto of productos) {
