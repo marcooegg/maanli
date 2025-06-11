@@ -94,7 +94,6 @@
                         <input type="text" class="form-control product-id" id='product_id_${cantLineas}' required>
                         <select class="form-select" id='descripcion_${cantLineas}' required>
                             <option value="" disabled selected>Seleccione un producto</option>
-                            <!-- Aquí podrías agregar opciones dinámicamente si tienes una lista de productos -->
                         </select>
                     </td>
                     <td>
@@ -134,7 +133,7 @@
                     .catch(error => {
                         console.error("Error al cargar los productos:", error);
                     });
-                document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
+                // document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
             });
 
             cantLineas++;
