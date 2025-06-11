@@ -86,13 +86,13 @@
         var cantLineas = 1;            
         const agregarLinea = () => {
             const tableBody = document.querySelector('#table_body');
+            // <input type="text" class="form-control product-id" id='product_id_${cantLineas}' required>
             const templateLinea = `<tr id='linea_${cantLineas}'>
                     <td>
                         <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
                     </td>
                     <td>
-                        <input type="text" class="form-control product-id" id='product_id_${cantLineas}' required>
-                        <select class="form-select" id='descripcion_${cantLineas}' required>
+                        <select class="form-select" id='descripcion_${cantLineas}' data-live-search="true" required>
                             <option value="" disabled selected>Seleccione un producto</option>
                         </select>
                     </td>
@@ -129,7 +129,7 @@
                         const select = document.querySelector(`#descripcion_${currentCantLineas}`);
                         select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
                         for (const producto of productos) {
-                            select.innerHTML += `<option value="${producto.id}">${producto.descripcion}</option>`;
+                            select.innerHTML += `<option value="${producto.id}" data-tokens="${producto.descripcion}">${producto.descripcion}</option>`;
                         }
 
                     })
