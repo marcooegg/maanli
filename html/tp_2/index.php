@@ -128,14 +128,15 @@
                         console.log(this.id.split('_')[2])
                         const select = document.querySelector(`#descripcion_${currentCantLineas}`);
                         select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
-                        productos.forEach(producto => {
+                        for (const producto of productos) {
                             select.innerHTML += `<option value="${producto.id}">${producto.descripcion}</option>`;
-                        });
+                        }
+
                     })
                     .catch(error => {
                         console.error("Error al cargar los productos:", error);
                     });
-                // document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
+                document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
             });
 
             cantLineas++;
