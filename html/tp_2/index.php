@@ -118,13 +118,14 @@
             });
             document.querySelector(`#product_id_${cantLineas}`).addEventListener('input', function() {
                 const descripcion = this.value;
-                const currentCantLineas = this.id.split('_')[1];
+                // const currentCantLineas = this.id.split('_')[1];
                 options = axios.get('php/productos.php', {
                         params: { descripcion: descripcion }
                     })
                     .then(response => {
                         const productos = response.data;
-                        const select = document.querySelector(`#descripcion_${currentCantLineas}`);
+                        console.log(this.id.split('_')[1])
+                        const select = document.querySelector(`#descripcion_${this.id.split('_')[1]}`);
                         select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
                         productos.forEach(producto => {
                             select.innerHTML += `<option value="${producto.id}">${producto.descripcion}</option>`;
