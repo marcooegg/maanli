@@ -124,7 +124,7 @@
                         params: { descripcion: descripcion }
                     })
                     .then(response => {
-                        const productos = response.data;
+                        const productos = response.data.message;
                         console.log(this.id.split('_')[2])
                         const select = document.querySelector(`#descripcion_${currentCantLineas}`);
                         select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
