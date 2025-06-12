@@ -83,12 +83,13 @@
     </div>
     </footer>
     <script>
-        var cantLineas = 1;            
+        var cantLineas = 1;
+        var productos;    
         var options = axios.get('php/productos.php', {
                     params: { descripcion: "" }
                 })
                 .then(response => {
-                    options = response.data.message ? response.data.message : [];
+                    productos = response.data.message;
                 })
                 .catch(error => {
                     console.error("Error al cargar los productos:", error);
