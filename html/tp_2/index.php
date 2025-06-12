@@ -84,7 +84,7 @@
     </footer>
     <script>
         var cantLineas = 1;
-        var productos;    
+        var productos = [];    
         var options = axios.get('php/productos.php', {
                     params: { descripcion: "" }
                 })
