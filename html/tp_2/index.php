@@ -85,7 +85,7 @@
     <script>
         var cantLineas = 1;            
         var options = axios.get('php/productos.php', {
-                    params: { descripcion: descripcion }
+                    params: { descripcion: "" }
                 })
                 .then(response => {
                     options = response.data.message ? response.data.message : [];
