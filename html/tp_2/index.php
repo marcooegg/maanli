@@ -84,6 +84,15 @@
     </footer>
     <script>
         var cantLineas = 1;            
+        var options = axios.get('php/productos.php', {
+                    params: { descripcion: descripcion }
+                })
+                .then(response => {
+                    options = response.data.message ? response.data.message : [];
+                })
+                .catch(error => {
+                    console.error("Error al cargar los productos:", error);
+                });
         const agregarLinea = () => {
             const tableBody = document.querySelector('#table_body');
             // <input type="text" class="form-control product-id" id='product_id_${cantLineas}' required>
@@ -122,24 +131,33 @@
             const descripcion = "";
             const currentCantLineas = cantLineas;
             console.log(currentCantLineas)
-            options = axios.get('php/productos.php', {
-                    params: { descripcion: descripcion }
-                })
-                .then(response => {
-                    const productos = response.data.message;
-                    const select = document.querySelector(`#descripcion_${currentCantLineas}`);
-                    select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
-                    for (const producto of productos) {
-                        select.innerHTML += `<option value="${producto.id}" data-tokens="${producto.descripcion}">${producto.descripcion}</option>`;
-                    }
+            // options = axios.get('php/productos.php', {
+            //         params: { descripcion: descripcion }
+            //     })
+            //     .then(response => {
+            //         const productos = response.data.message;
+            //         const select = document.querySelector(`#descripcion_${currentCantLineas}`);
+            //         select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
+            //         for (const producto of productos) {
+            //             select.innerHTML += `<option value="${producto.id}" data-tokens="${producto.descripcion}">${producto.descripcion}</option>`;
+            //         }
 
-                })
-                .catch(error => {
-                    console.error("Error al cargar los productos:", error);
-                });
-            document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
+            //     })
+            //     .catch(error => {
+            //         console.error("Error al cargar los productos:", error);
+            //     });
+            const select = document.querySelector(`#descripcion_${currentCantLineas}`);
+            select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
+            for (const producto of productos) {
+                select.innerHTML += `<option value="${producto.id}" data-tokens="${producto.descripcion}">${producto.descripcion}</option>`;
+            }
+            // document.querySelector(`#descripcion_${currentCantLineas}`).innerHTML = `<option value="${descripcion}" selected>${descripcion}</option>`;
             // });
-
+            select.addEventListener("change", function() {
+                const selectedOption = this.options[this.selectedIndex];
+                document.querySelector(`#precio_${currentCantLineas}`).value = options[this.selectedIndex].precio
+                console.log("Producto seleccionado:", selectedOption.text);
+            });
             cantLineas++;
         };
                 
