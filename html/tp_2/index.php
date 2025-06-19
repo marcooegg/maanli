@@ -150,8 +150,10 @@
                     sugerencias.innerHTML = '';
                     return;
                 };
-                buscarProducto(query).then(productos){
+                buscarProducto(query).then(productos => {
                     sugerencias.innerHTML = '';
+                    if (!productos || productos.length === 0) return;
+
                     productos.forEach(p => {
                         const div = document.createElement('div');
                         div.textContent = p.descripcion;
@@ -161,12 +163,13 @@
                             sugerencias.innerHTML = '';
                             input.dataset.productId = p.id;
                             input.dataset.precio = p.precio;
-                            });
-                            sugerencias.appendChild(div);
+                            const precioInput = document.querySelector(`#precio_${currentCantLineas}`);
+                            if (precioInput) precioInput.value = p.precio;
                         });
+                        sugerencias.appendChild(div);
                     });
-                };
-
+                });
+            });
 
             // Cierra las sugerencias si clickeás afuera
             document.addEventListener('click', (e) => {
