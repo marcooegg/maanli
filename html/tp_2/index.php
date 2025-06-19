@@ -166,6 +166,8 @@
                         input.dataset.precio = p.precio;
                         });
                         sugerencias.appendChild(div);
+                        const precioInput = document.querySelector(`#precio_${currentCantLineas}`);
+                        if (precioInput) precioInput.value = p.precio;
                     });
                 });
 
