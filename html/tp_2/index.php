@@ -93,15 +93,16 @@
         //         .catch(error => {
         //             console.error("Error al cargar los productos:", error);
         //         });
-        const buscarProducto = descripcion => {
-            axios.get('php/productos.php', {
+        const buscarProducto = async (descripcion) => {
+            try {
+                const response = await axios.get('php/productos.php', {
                     params: { descripcion: descripcion }
-                })
-                .then(response => response.data.message)
-                .catch(error => {
-                    console.error("Error al cargar los productos:", error);
-                    return []
                 });
+                return response.data.message;
+            } catch (error) {
+                console.error("Error al cargar los productos:", error);
+                return [];
+            }
         };
         const agregarLinea = () => {
             const tableBody = document.querySelector('#table_body');
@@ -150,26 +151,23 @@
                     sugerencias.innerHTML = '';
                     return;
                 };
-                buscarProducto(query).then(productos => {
-                    sugerencias.innerHTML = '';
-                    if (!productos || productos.length === 0) return;
+                const productos = await buscarProducto(query);
 
-                    productos.forEach(p => {
-                        const div = document.createElement('div');
-                        div.textContent = p.descripcion;
-                        div.className = 'autocomplete-suggestion';
-                        div.addEventListener('click', () => {
-                            input.value = p.descripcion;
-                            sugerencias.innerHTML = '';
-                            input.dataset.productId = p.id;
-                            input.dataset.precio = p.precio;
-                            const precioInput = document.querySelector(`#precio_${currentCantLineas}`);
-                            if (precioInput) precioInput.value = p.precio;
+                sugerencias.innerHTML = '';
+                productos.forEach(p => {
+                    const div = document.createElement('div');
+                    div.textContent = p.descripcion;
+                    div.className = 'autocomplete-suggestion';
+                    div.addEventListener('click', () => {
+                        input.value = p.descripcion;
+                        sugerencias.innerHTML = '';
+                        // Podés guardar el id del producto seleccionado en una variable
+                        input.dataset.productId = p.id;
+                        input.dataset.precio = p.precio;
                         });
                         sugerencias.appendChild(div);
                     });
                 });
-            });
 
             // Cierra las sugerencias si clickeás afuera
             document.addEventListener('click', (e) => {
