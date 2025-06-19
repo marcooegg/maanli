@@ -159,15 +159,15 @@
                     div.textContent = p.descripcion;
                     div.className = 'autocomplete-suggestion';
                     div.addEventListener('click', () => {
-                        input.value = p.descripcion;
-                        sugerencias.innerHTML = '';
-                        // Podés guardar el id del producto seleccionado en una variable
-                        input.dataset.productId = p.id;
-                        input.dataset.precio = p.precio;
+                            input.value = p.descripcion;
+                            sugerencias.innerHTML = '';
+                            // Podés guardar el id del producto seleccionado en una variable
+                            input.dataset.productId = p.id;
+                            input.dataset.precio = p.precio;
+                            const precioInput = document.querySelector(`#precio_${currentCantLineas}`);
+                            if (precioInput) precioInput.value = p.precio;
                         });
                         sugerencias.appendChild(div);
-                        const precioInput = document.querySelector(`#precio_${currentCantLineas}`);
-                        if (precioInput) precioInput.value = p.precio;
                     });
                 });
 
