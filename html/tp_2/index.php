@@ -84,7 +84,7 @@
     </footer>
     <script>
         var cantLineas = 1;
-        var productos = [];    
+        // var productos = [];    
         // var options = axios.get('php/productos.php', {
         //             params: { descripcion: "" }
         //         })
@@ -144,15 +144,15 @@
             const input = document.getElementById(`descripcion_${currentCantLineas}`);
             const sugerencias = document.getElementById(`sugerencias_${currentCantLineas}`);
 
-            input.addEventListener('input', async function () {
+            input.addEventListener('input', function () {
                 const query = this.value;
 
                 if (query.length < 2) {
                     sugerencias.innerHTML = '';
                     return;
                 };
-                const productos = await buscarProducto(query);
-                if (productos.length < 1) return;
+                const productos = buscarProducto(query);
+                if (productos?.length < 1) return;
                 sugerencias.innerHTML = '';
                 productos.forEach(p => {
                     const div = document.createElement('div');
