@@ -152,7 +152,7 @@
                     return;
                 };
                 const productos = await buscarProducto(query);
-
+                if (productos.length < 1) return;
                 sugerencias.innerHTML = '';
                 productos.forEach(p => {
                     const div = document.createElement('div');

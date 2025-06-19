@@ -16,3 +16,21 @@ ter = #D6B170
     background-color: #018080;
     color: white;
 }
+.autocomplete-suggestions {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    width: 300px;
+    z-index: 10;
+}
+
+.autocomplete-suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #f0f0f0;
+}
