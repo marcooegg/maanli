@@ -98,11 +98,10 @@
             axios.get('php/productos.php', {
                     params: { descripcion: descripcion }
                 })
-                .then(response => {
-                    productos = response.data.message;
-                })
+                .then(response => response.data.message)
                 .catch(error => {
                     console.error("Error al cargar los productos:", error);
+                    return [];
                 });
         };
         const agregarLinea = () => {
@@ -152,7 +151,7 @@
                     sugerencias.innerHTML = '';
                     return;
                 };
-                const productos = buscarProducto(query)
+                const productos = await buscarProducto(query);
 
                 sugerencias.innerHTML = '';
                 productos.forEach(p => {
