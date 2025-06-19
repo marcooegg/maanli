@@ -22,7 +22,7 @@ ter = #D6B170
     overflow-y: auto;
     position: absolute;
     background-color: white;
-    width: 300px;
+    width: inherit;
     z-index: 10;
 }
 
