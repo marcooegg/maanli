@@ -24,7 +24,7 @@
         public function read($query, $params = [], $fetchMode = PDO::FETCH_ASSOC) {
             $stmt = $this->pdo->prepare($query);
             $stmt->execute($params);
-            $this->closeConnection();
+            // $this->closeConnection();
             return $stmt->fetchAll($fetchMode);
         }
 
@@ -32,7 +32,7 @@
             $query = $query . "RETURNING id"; // Assuming you want to return the last inserted ID
             $stmt = $this->pdo->prepare($query);
             $res = $stmt->execute($params);
-            $this->closeConnection();
+            // $this->closeConnection();
             return $res;
         }
     }

@@ -106,17 +106,13 @@
         };
         const agregarLinea = () => {
             const tableBody = document.querySelector('#table_body');
-            // <input type="text" class="form-control product-id" id='product_id_${cantLineas}' required>
-            // <select class="form-select" id='descripcion_${cantLineas}' data-live-search="true" required>
-            //     <option value="" disabled selected>Seleccione un producto</option>
-            // </select>
             const templateLinea = `<tr id='linea_${cantLineas}'>
             <td>
             <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
             </td>
                     <td>
                         <input type="text" id='descripcion_${cantLineas}' autocomplete="off">
-                        <div id="sugerencias_${cantLineas}" class="autocomplete-suggestions"></div>
+                        <div id="sugerencias_${cantLineas}" class="form-control autocomplete-suggestions"></div>
                     </td>
                     <td>
                         <input type="number" class="form-control precio" id='precio_${cantLineas}' required>
@@ -170,23 +166,11 @@
                         sugerencias.appendChild(div);
                     });
                 });
-
-            // Cierra las sugerencias si clickeás afuera
             document.addEventListener('click', (e) => {
                 if (!sugerencias.contains(e.target) && e.target !== input) {
                     sugerencias.innerHTML = '';
                 }
                 });
-            // const select = document.querySelector(`#descripcion_${currentCantLineas}`);
-            // select.innerHTML = '<option value="" disabled selected>Seleccione un producto</option>';
-            // for (const producto of productos) {
-            //     select.innerHTML += `<option value="${producto.id}" data-tokens="${producto.descripcion}">${producto.descripcion}</option>`;
-            // }
-            // select.addEventListener("change", function() {
-            //     const selectedOption = this.options[this.selectedIndex];
-            //     document.querySelector(`#precio_${currentCantLineas}`).value = options[this.selectedIndex].precio
-            //     console.log("Producto seleccionado:", selectedOption.text);
-            // });
             cantLineas++;
         };
                 
