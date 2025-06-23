@@ -222,10 +222,14 @@
                 const cantidad = parseFloat(document.querySelector(`#cantidad_${i}`).value) || 0;
                 const descripcion = document.querySelector(`#linea_${i} input[type="text"]`).value;
                 const precio = parseFloat(document.querySelector(`#precio_${i}`).value) || 0;
-                const subtotal = parseFloat(document.querySelector(`#subtotal_${i}`).value) || 0;
+                // const subtotal = parseFloat(document.querySelector(`#subtotal_${i}`).value) || 0;
 
-                if (cantidad && descripcion && precio && subtotal) {
-                    lineas.push({ cantidad, descripcion, precio, subtotal });
+                if (cantidad && descripcion && precio) { // && subtotal
+                    lineas.push({ 
+                        "cantidad" : cantidad,
+                        "descripcion" : descripcion,
+                        "precioUnitario" : precio,
+                    });
                 }
             }
 
