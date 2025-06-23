@@ -44,7 +44,7 @@
                 VALUES (:factura_id, :descripcion, :cantidad, :precio_unitario, :total)
             EOT;
             $query = "SELECT * FROM producto WHERE descripcion LIKE :descripcion";
-            $producto_id = $conn->read($query, [":descripcion" => "%" . $descripcion ."%"]);
+            $producto_id = $conn->read($query, [":descripcion" => "%" . $linea->descripcion ."%"]);
             $total = $linea->cantidad * $linea->precioUnitario;
             $conn->write($writeLineQuery, [
                 ":factura_id" => $factura_id,
