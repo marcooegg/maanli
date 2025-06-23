@@ -6,6 +6,9 @@
     $input = file_get_contents("php://input");
     $data = json_decode($input);
 
+    // $email = $data->email ?? '';
+    // $password = $data->password ?? '';
+
     $numeroFactura = $data->numeroFactura ?? '';
     $fecha = $data->fecha ?? '';
     $condicionVenta = $data->condicionVenta ?? '';
@@ -15,9 +18,9 @@
 
     try {
         $conn = new DataBaseConnection();
-        echo $cliente;
+
         $client_id = $conn->read(query: "SELECT id FROM persona WHERE nip = :cliente", params: [":cliente" => $cliente]);
-        echo $client_id;
+
         
         $writeQuery = "INSERT INTO factura (empresa_id,cliente_id,fecha,numero,condicion) VALUES (:empresa_id, :cliente_id, :fecha, :numero, :condicion)";
 
@@ -57,11 +60,7 @@
             : json_encode(["success" => false, "message" => "Credenciales inválidas"]);
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode(["success" => false,
-        "message" => "Error interno",
-        "error" => $e->getMessage(),
-        "client_id" => $client_id,
-        "cliente" => $cliente]);
+        echo json_encode(["success" => false, "message" => "Error interno" . $client_id . $cliente, "error" => $e->getMessage()]);
     }
     
 ?>
