@@ -57,7 +57,11 @@
             : json_encode(["success" => false, "message" => "Credenciales inválidas"]);
     } catch (Exception $e) {
         http_response_code(500);
-        echo json_encode(["success" => false, "message" => "Error interno", "error" => $e->getMessage(),"client_id" => $client_id, "cliente" => $cliente]);
+        echo json_encode(["success" => false,
+        "message" => "Error interno",
+        "error" => $e->getMessage(),
+        "client_id" => $client_id,
+        "cliente" => $cliente]);
     }
     
 ?>
