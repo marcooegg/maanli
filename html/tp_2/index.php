@@ -226,9 +226,9 @@
 
                 if (cantidad && descripcion && precio) { // && subtotal
                     lineas.push({ 
-                        "cantidad" : cantidad,
-                        "descripcion" : descripcion,
-                        "precioUnitario" : precio,
+                        cantidad : cantidad,
+                        descripcion : descripcion,
+                        precioUnitario : precio,
                     });
                 }
             }
