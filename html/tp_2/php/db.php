@@ -29,7 +29,7 @@
         }
 
         public function write($query, $params = []) {
-            $query = $query . "RETURNING id"; // Assuming you want to return the last inserted ID
+            $query = $query . " RETURNING id"; // Assuming you want to return the last inserted ID
             $stmt = $this->pdo->prepare($query);
             $res = $stmt->execute($params);
             // $this->closeConnection();

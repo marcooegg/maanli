@@ -111,8 +111,8 @@
             <input type="number" class="form-control cantidad" id='cantidad_${cantLineas}' required>
             </td>
                     <td>
-                        <input type="text" id='descripcion_${cantLineas}' autocomplete="off">
-                        <div id="sugerencias_${cantLineas}" class="form-control autocomplete-suggestions"></div>
+                        <input type="text" class="form-control" id='descripcion_${cantLineas}' autocomplete="off">
+                        <div id="sugerencias_${cantLineas}" class="autocomplete-suggestions"></div>
                     </td>
                     <td>
                         <input type="number" class="form-control precio" id='precio_${cantLineas}' required>
