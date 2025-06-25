@@ -39,7 +39,7 @@
 
 
         foreach ($lineas as $linea) {
-            $writeLineaQuery = <<<EOT
+            $writeLineQuery = <<<EOT
                 INSERT INTO factura_linea (factura_id, product_id, cantidad, precio_unitario,total)
                 VALUES (:factura_id, :descripcion, :cantidad, :precio_unitario, :total)
             EOT;
