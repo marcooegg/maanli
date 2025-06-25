@@ -10,7 +10,7 @@
                 $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$name;charset=$charset", $user, $pass);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
-                die("Error de conexión: " . $e->getMessage());
+                throw new Exception("Error de conexión: " . $e->getMessage());
             }
         }
         public function getConnection() {
@@ -32,7 +32,8 @@
             $stmt = $this->pdo->prepare($query);
             $res = $stmt->execute($params);
             // $this->closeConnection();
-            return $this->pdo->prepare("SELECT LAST_INSERT_ID()")->execute([]);
+            // return $this->pdo->prepare("SELECT LAST_INSERT_ID()")->execute([]);
+            return $this->pdo->lastInsertId();
         }
     }
 ?>
