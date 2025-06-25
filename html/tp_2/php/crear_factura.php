@@ -48,7 +48,7 @@
             $total = $linea->cantidad * $linea->precioUnitario;
             $conn->write($writeLineQuery, [
                 ":factura_id" => $factura_id,
-                ":producto_id" => $product_id,
+                ":producto_id" => $producto_id,
                 ":cantidad" => $linea->cantidad,
                 ":precio_unitario" => $linea->precioUnitario,
                 ":total" => $total,
