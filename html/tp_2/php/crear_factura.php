@@ -6,9 +6,6 @@
     $input = file_get_contents("php://input");
     $data = json_decode($input);
 
-    // $email = $data->email ?? '';
-    // $password = $data->password ?? '';
-
     $numeroFactura = $data->numeroFactura ?? '';
     $fecha = $data->fecha ?? '';
     $condicionVenta = $data->condicionVenta ?? '';
