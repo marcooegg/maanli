@@ -40,11 +40,12 @@
 
         foreach ($lineas as $linea) {
             $writeLineQuery = <<<EOT
-                INSERT INTO linea_factura (factura_id, product_id, cantidad, precio_unitario,total)
+                INSERT INTO linea_factura (factura_id, producto_id, cantidad, precio,total)
                 VALUES (:factura_id, :producto_id, :cantidad, :precio_unitario, :total)
             EOT;
             $query = "SELECT * FROM producto WHERE descripcion LIKE :descripcion";
             $producto_id = $conn->read($query, [":descripcion" => "%" . $linea->descripcion ."%"]);
+            $producto_id = $producto_id[0]['id'];
             $total = $linea->cantidad * $linea->precioUnitario;
             $conn->write($writeLineQuery, [
                 ":factura_id" => $factura_id,
@@ -55,9 +56,8 @@
             ]);
         }
 
-        echo $res
-            ? json_encode(["success" => true, "message" => "Login correcto"])
-            : json_encode(["success" => false, "message" => "Credenciales inválidas"]);
+       echo json_encode(["success" => true, "message" => "Factura creada correctamente"]);
+
     } catch (Exception $e) {
         http_response_code(500);
         echo json_encode([
