@@ -7,6 +7,8 @@
     $data = json_decode($input);
 
     $numeroFactura = $data->numeroFactura ?? '';
+    $numeroFactura = str_pad($numeroFactura, 8, "0", STR_PAD_LEFT);
+    $numeroFactura = "0001-" . $numeroFactura;
     $fecha = $data->fecha ?? '';
     $condicionVenta = $data->condicionVenta ?? '';
     $cliente = intval($data->cuitCliente ?? '');
