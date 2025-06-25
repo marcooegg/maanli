@@ -78,6 +78,11 @@
     </div>
     <footer class="bg-primary text-center py-3">
     <div class="oe_button_box" name="button_box">
+        <div class="oe_button_box" name="button_box">
+            <div class="container my-4">
+                <a href="index.php" class="btn btn-success">Volver</a>
+            </div>
+        </div>
         <button class="oe_stat_button btn btn-primary" id="btnCrearFactura">Crear Factura</button>
         </button>
     </div>
