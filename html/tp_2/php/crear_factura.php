@@ -12,7 +12,7 @@
     $numeroFactura = $data->numeroFactura ?? '';
     $fecha = $data->fecha ?? '';
     $condicionVenta = $data->condicionVenta ?? '';
-    $cliente = $data->parseInt(cuitCliente) ?? '';
+    $cliente = intval($data->cuitCliente ?? '');
     $lineas = $data->lineas ?? [];
     
 
