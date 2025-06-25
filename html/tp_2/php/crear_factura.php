@@ -41,7 +41,7 @@
         foreach ($lineas as $linea) {
             $writeLineQuery = <<<EOT
                 INSERT INTO factura_linea (factura_id, product_id, cantidad, precio_unitario,total)
-                VALUES (:factura_id, :descripcion, :cantidad, :precio_unitario, :total)
+                VALUES (:factura_id, :producto_id, :cantidad, :precio_unitario, :total)
             EOT;
             $query = "SELECT * FROM producto WHERE descripcion LIKE :descripcion";
             $producto_id = $conn->read($query, [":descripcion" => "%" . $linea->descripcion ."%"]);
