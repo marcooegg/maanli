@@ -26,16 +26,26 @@
             $this->pdo = null;
         }
 
-        public function read($query, $params = [], $fetchMode = PDO::FETCH_ASSOC) {
+        public function read($fields = ["*"], $table = "", $where="", $fetchMode = PDO::FETCH_ASSOC) {
+            $fields = implode(',', $fields);
+            $query = "SELECT {$fields} FROM {$table}";
+            if ($where) {
+                $query .= " " . $where;
+            }
+
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute($params);
+            $stmt->execute();
             return $stmt->fetchAll($fetchMode);
         }
+
+        public function write(string $table,array $fields_values, $fetchMode = PDO::FETCH_ASSOC) {
+            $fields = array_keys($fields_values);
+            $values = array_values($fields_values);
+            $query = "INSERT INTO {$table} ({$fields}) VALUES {$values}";
+
+            $stmt = $this->pdo->prepare($query);
+            $res = $stmt->execute($params);
+            return $this->pdo->lastInsertId();
+        }
     }
-    // try {
-    //     $pdo = new PDO("mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4", $DB_USER, $DB_PASS);
-    //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // } catch (PDOException $e) {
-    //     die("Error de conexión: " . $e->getMessage());
-    // }
 ?>

@@ -11,9 +11,7 @@
 
     try {
         $conn = new DataBaseConnection();
-        $query = "SELECT * FROM user WHERE login = :email";
-        $res = $conn->read($query, [":email" => $email]);
-
+        $res = $conn->read($table="user", $where= "email = {$email} AND password = {$password}");
         echo $res
             ? json_encode(["success" => true, "message" => "Login correcto"])
             : json_encode(["success" => false, "message" => "Credenciales inválidas"]);
