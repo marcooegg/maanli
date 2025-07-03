@@ -11,7 +11,9 @@
 
     try {
         $conn = new DataBaseConnection();
-        $res = $conn->read($fields = ["id"], $table="user", $where= "login = '{$email}' AND password = '{$password}'");
+        // $res = $conn->read($fields = ["id"], $table="user", $where= "login = '{$email}' AND password = '{$password}'");
+        $fields = [":email" => $email, ":pass"=> $password];
+        $res = $conn->call($method="obtener_usuario",$fields);
         echo $res
             ? json_encode(["success" => true, "message" => "Login correcto"])
             : json_encode(["success" => false, "message" => "Credenciales inválidas"]);
