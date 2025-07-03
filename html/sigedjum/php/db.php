@@ -30,7 +30,7 @@
             $fields = implode(',', $fields);
             $query = "SELECT {$fields} FROM {$table}";
             if ($where) {
-                $query .= " " . $where;
+                $query .= "WHERE " . $where;
             }
 
             $stmt = $this->pdo->prepare($query);
