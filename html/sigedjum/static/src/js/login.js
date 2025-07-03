@@ -10,7 +10,7 @@ createApp({
     methods: {
         handleLogin() {
             // alert(`Email: ${this.email}\nPassword: ${this.password}`);
-            axios.post('php/login.php', {
+            axios.post('api/login.php', {
                 email: this.email,
                 password: this.password
             })
@@ -26,7 +26,6 @@ createApp({
             })
             .catch(error => {
                 console.error('There was an error during the login process:', error);
-                // alert('An error occurred. Please try again later.');
             });
         },
         
