@@ -3,6 +3,7 @@ DELIMITER $$
 CREATE TRIGGER update_timestamp_country
 BEFORE UPDATE ON country
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -10,6 +11,7 @@ END$$
 CREATE TRIGGER update_timestamp_city
 BEFORE UPDATE ON city
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -17,6 +19,7 @@ END$$
 CREATE TRIGGER update_timestamp_dependency
 BEFORE UPDATE ON dependency
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -24,6 +27,7 @@ END$$
 CREATE TRIGGER update_timestamp_partner
 BEFORE UPDATE ON partner
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -31,13 +35,15 @@ END$$
 CREATE TRIGGER update_timestamp_users
 BEFORE UPDATE ON users
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
 
 CREATE TRIGGER update_timestamp_groups
-BEFORE UPDATE ON groups
+BEFORE UPDATE ON `groups`
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -45,6 +51,7 @@ END$$
 CREATE TRIGGER update_timestamp_user_group
 BEFORE UPDATE ON user_group
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -52,13 +59,15 @@ END$$
 CREATE TRIGGER update_timestamp_case_type
 BEFORE UPDATE ON case_type
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
 
 CREATE TRIGGER update_timestamp_case
-BEFORE UPDATE ON case
+BEFORE UPDATE ON `case`
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -66,6 +75,7 @@ END$$
 CREATE TRIGGER update_timestamp_appointment
 BEFORE UPDATE ON appointment
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -73,6 +83,7 @@ END$$
 CREATE TRIGGER update_timestamp_notes
 BEFORE UPDATE ON notes
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$
@@ -80,6 +91,7 @@ END$$
 CREATE TRIGGER update_timestamp_attachment
 BEFORE UPDATE ON attachment
 FOR EACH ROW
+DETERMINISTIC
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
 END$$

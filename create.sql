@@ -1,135 +1,153 @@
-CREATE TABLE country
+CREATE TABLE IF NOT EXISTS country
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     code VARCHAR(10) UNIQUE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
 
 
-CREATE TABLE city
+CREATE TABLE IF NOT EXISTS city
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     postal_code VARCHAR(20),
-    country_id INT FOREIGN KEY REFERENCES country(id),
+    country_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (country_id) REFERENCES country(id)
 );
 
 
-CREATE TABLE dependency
+CREATE TABLE IF NOT EXISTS dependency
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
 
-CREATE TABLE partner
+CREATE TABLE IF NOT EXISTS partner
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     phone VARCHAR(20),
     address TEXT,
     postal_code VARCHAR(20),
     nip VARCHAR(20),
-    city_id INT FOREIGN KEY REFERENCES city(id),
-    country_id INT FOREIGN KEY REFERENCES country(id),
-    dependency_id INT FOREIGN KEY REFERENCES dependency(id),
+    city_id INT,
+    country_id INT,
+    dependency_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    FOREIGN KEY (city_id) REFERENCES city(id),
+    FOREIGN KEY (country_id) REFERENCES country(id),
+    FOREIGN KEY (dependency_id) REFERENCES dependency(id)
 );
 
 
-CREATE TABLE users
+CREATE TABLE IF NOT EXISTS users
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role VARCHAR(50) NOT NULL,
-    partner_id INT FOREIGN KEY REFERENCES partner(id),
+    partner_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    FOREIGN KEY (partner_id) REFERENCES partner(id)
 );
 
-CREATE TABLE groups
+CREATE TABLE IF NOT EXISTS `groups`
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
 
-CREATE TABLE user_group
+CREATE TABLE IF NOT EXISTS user_group
 (
-    user_id INT FOREIGN KEY REFERENCES users(id),
-    group_id INT FOREIGN KEY REFERENCES groups(id),
+    user_id INT,
+    group_id INT,
     PRIMARY KEY (user_id, group_id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (group_id) REFERENCES `groups`(id)
 );
 
-CREATE TABLE case_type
+CREATE TABLE IF NOT EXISTS case_type
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
 
-CREATE TABLE case
+CREATE TABLE IF NOT EXISTS `case`
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     status VARCHAR(50) NOT NULL,
-    case_type_id INT FOREIGN KEY REFERENCES case_type(id),
-    sponsored_partner_id INT FOREIGN KEY REFERENCES partner(id),
-    accuser_partner_id INT FOREIGN KEY REFERENCES partner(id),
-    assigned_user_id INT FOREIGN KEY REFERENCES users(id),
+    case_type_id INT,
+    sponsored_partner_id INT,
+    accuser_partner_id INT,
+    assigned_user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    partner_id INT FOREIGN KEY REFERENCES partner(id)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    partner_id INT,
+    FOREIGN KEY (case_type_id) REFERENCES case_type(id),
+    FOREIGN KEY (sponsored_partner_id) REFERENCES partner(id),
+    FOREIGN KEY (accuser_partner_id) REFERENCES partner(id),
+    FOREIGN KEY (assigned_user_id) REFERENCES users(id),
+    FOREIGN KEY (partner_id) REFERENCES partner(id)
 );
 
 
-CREATE TABLE appointment
+CREATE TABLE IF NOT EXISTS appointment
 (
-    id INT PRIMARY KEY,
-    case_id INT FOREIGN KEY REFERENCES case(id),
-    user_id INT FOREIGN KEY REFERENCES users(id),
-    partner_id INT FOREIGN KEY REFERENCES partner(id),
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    case_id INT,
+    user_id INT,
+    partner_id INT,
     location VARCHAR(255) NOT NULL,
     appointment_date TIMESTAMP NOT NULL,
     status VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    FOREIGN KEY (case_id) REFERENCES `case`(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (partner_id) REFERENCES partner(id)
 );
 
-CREATE TABLE notes
+CREATE TABLE IF NOT EXISTS notes
 (
-    id INT PRIMARY KEY,
-    case_id INT FOREIGN KEY REFERENCES case(id),
-    user_id INT FOREIGN KEY REFERENCES users(id),
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    case_id INT,
+    user_id INT,
+    appointment_id INT,
     content TEXT NOT NULL,
-    appointment_id INT FOREIGN KEY REFERENCES appointment(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+    FOREIGN KEY (case_id) REFERENCES `case`(id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (appointment_id) REFERENCES appointment(id)
 );
 
-CREATE TABLE attachment
+CREATE TABLE IF NOT EXISTS attachment
 (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     table_name VARCHAR(50) NOT NULL,
     res_id INT NOT NULL,
     file_path VARCHAR(255) NOT NULL,
     file_type VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
 );
