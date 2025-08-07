@@ -32,7 +32,7 @@
             if ($where) {
                 $query .= "WHERE " . $where;
             }
-
+            
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
             return $stmt->fetchAll($fetchMode);
