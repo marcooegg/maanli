@@ -52,7 +52,7 @@ createApp({
           if (res.data.success) {
             this.mensaje = this.isEdit ? 'Nota actualizada con éxito' : 'Nota creado con éxito';
             if (!this.isEdit) {
-              this.expediente = {
+              this.nota = {
                 id: null,
                 case_id: '',
                 user_id: '',

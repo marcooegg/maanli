@@ -33,7 +33,7 @@ createApp({
                 });
         },
         goCrear() {
-            window.location.href = `crear_nota.html?id=${this.expedienteId}`;
+            window.location.href = `crear_nota.html?expediente_id=${this.expedienteId}`;
         },
         volverExpte() {
             const params = new URLSearchParams(window.location.search);
