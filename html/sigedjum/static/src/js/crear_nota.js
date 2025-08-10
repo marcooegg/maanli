@@ -8,6 +8,7 @@ createApp({
         case_id: '',
         user_id: '',
         appointment_id : '',
+        title: '',
         content: '',
       },
       isEdit: false,
@@ -20,12 +21,12 @@ createApp({
     cargarSelects() {
       
     },
-    cargarExpediente(id) {
+    cargarNota(id) {
       this.cargando = true;
       axios.get('api/ver_nota.php', { params: { id } })
         .then(res => {
           if (res.data.success) {
-            this.expediente = res.data.expediente;
+            this.nota = res.data.nota;
             this.isEdit = true;
           } else {
             this.error = res.data.error || 'No se encontró expediente';
@@ -41,24 +42,23 @@ createApp({
       this.error = '';
       this.mensaje = '';
       this.cargando = true;
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('expediente_id');
+      this.nota.case_id = id;
+      const url = this.isEdit ? 'api/editar_nota.php' : 'api/crear_nota.php';
 
-      const url = this.isEdit ? 'api/editar_expediente.php' : 'api/crear_expediente.php';
-
-      axios.post(url, this.expediente)
+      axios.post(url, this.nota)
         .then(res => {
           if (res.data.success) {
-            this.mensaje = this.isEdit ? 'Expediente actualizado con éxito' : 'Expediente creado con éxito';
+            this.mensaje = this.isEdit ? 'Nota actualizada con éxito' : 'Nota creado con éxito';
             if (!this.isEdit) {
               this.expediente = {
                 id: null,
+                case_id: '',
+                user_id: '',
+                appointment_id : '',
                 title: '',
-                description: '',
-                status: '',
-                case_type_id: '',
-                sponsored_partner_id: '',
-                accuser_partner_id: '',
-                assigned_user_id: '',
-                partner_id: '',
+                content: '',
               };
             }
           } else {
@@ -81,7 +81,7 @@ createApp({
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     if (id) {
-      this.cargarExpediente(id);
+      this.cargarNota(id);
     }
   }
 }).mount('#app');

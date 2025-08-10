@@ -13,20 +13,17 @@ try {
     $input = json_decode(file_get_contents('php://input'), true);
 
     $sql = "INSERT INTO `case` 
-      (title, description, status, case_type_id, sponsored_partner_id, accuser_partner_id, assigned_user_id, partner_id) 
+      (title, content, case_id, user_id, appointment_id) 
       VALUES 
-      (:title, :description, :status, :case_type_id, :sponsored_partner_id, :accuser_partner_id, :assigned_user_id, :partner_id)";
+      (:title, :content, :case_id, :user_id, :appointment_id)";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
-      ':title' => $input['title'],
-      ':description' => $input['description'],
-      ':status' => $input['status'],
-      ':case_type_id' => $input['case_type_id'],
-      ':sponsored_partner_id' => $input['sponsored_partner_id'],
-      ':accuser_partner_id' => $input['accuser_partner_id'],
-      ':assigned_user_id' => $input['assigned_user_id'],
-      ':partner_id' => $input['partner_id'],
+        ':title' => $input['title'],
+        ':content' => $input['content'],
+        ':case_id' => $input['case_id'],
+        ':user_id' => $input['user_id'],
+        ':appointment_id' => $input['appointment_id'],
     ]);
 
     echo json_encode(['success' => true, 'id' => $pdo->lastInsertId()]);
