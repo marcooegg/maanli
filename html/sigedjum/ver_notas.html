@@ -28,34 +28,11 @@
     <!-- Contenido principal -->
     <div id="app">
         <button @click="goCrear" class="btn btn-primary mb-3">Crear nueva nota</button>
-        <!-- <table class="table table-bordered" v-if="tableData.length">
-            <thead>
-                <tr>
-                <th>Título</th>
-                <th>Contenido</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in tableData" :key="item.id">
-                <td>{{ item.title }}</td>
-                <td>{{ item.content }}</td>
-                </tr>
-            </tbody>
-        </table> -->
         <div v-if="!tableData.length" class="alert alert-info">No hay notas disponibles.</div>
         <div v-for="nota in notas" :key="nota.id" class="mb-3">
             <h5>{{ nota.title }}</h5>
             <p>{{ nota.content }}</p>
         </div>
-        <!-- <div class="mb-3 d-flex align-items-center">
-            <label for="title" class="form-label me-2 mb-0" style="white-space: nowrap;">Título</label>
-            <textarea v-model="nota.title" id="title" class="form-control" rows="1" required style="resize: none;"></textarea>
-        </div>
-
-        <div class="mb-3 full-width">
-            <label for="content" class="form-label">Contenido</label>
-            <textarea v-model="nota.content" id="content" class="form-control" rows="3" required></textarea>
-        </div> -->
 
      <div class="full-width mb-3 d-flex gap-2">
         <button type="button" class="btn btn-secondary flex-grow-1" @click="volverExpte" :disabled="cargando">Volver al Expediente</button>

@@ -7,7 +7,7 @@ require_once "../php/db.php";
 
 try {
     $conn = new DataBaseConnection();
-    $id = $_GET['id'] ?? null;
+    $id = $_GET['expediente_id'] ?? null;
     if (!$id) {
         echo json_encode(['success' => false, 'error' => 'No se especificó ID']);
         exit;
@@ -26,10 +26,10 @@ try {
     LEFT JOIN appointment app ON n.appointment_id = app.id
     LEFT JOIN `case` c ON c.id = n.case_id
     LEFT JOIN (SELECT users.id, partner.name as username FROM users INNER JOIN partner on users.partner_id = partner.id ORDER BY name) u ON c.assigned_user_id = u.id
-    WHERE c.id = :id";
+    WHERE c.id = :expediente_id";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([':id' => $id]);
+    $stmt->execute([':expediente_id' => $expediente_id]);
 
     $expediente = $stmt->fetch(PDO::FETCH_ASSOC);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
