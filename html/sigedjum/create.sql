@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS notes
     case_id INT,
     user_id INT,
     appointment_id INT,
+    `title` VARCHAR(64) NOT NULL;
     content TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,

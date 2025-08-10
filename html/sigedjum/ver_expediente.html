@@ -17,11 +17,11 @@
                 <a class="navbar-brand fw-bold" href="#">JURI</a>
             </div>
         </nav>
-        <div class="bg-primary p-2">
-            <a href="mis_expedientes.html" class="btn btn-light btn-sm me-2">Mis casos</a>
-            <button class="btn btn-light btn-sm me-2">Mis audiencias</button>
-            <button class="btn btn-light btn-sm me-2">Mis documentos</button>
-            <button class="btn btn-light btn-sm">Mis notificaciones</button>
+        <div class="bg-primary p-2 navbar-buttons">
+            <a href="mis_expedientes.html">Mis casos</a>
+            <button>Mis audiencias</button>
+            <button>Mis documentos</button>
+            <button>Mis notificaciones</button>
         </div>
     </header>
 
@@ -34,38 +34,40 @@
     <div v-else>
       <dl class="row">
         <dt class="col-sm-3">ID</dt>
-        <dd class="col-sm-9">{{ expediente.id }}</dd>
+        <dd class="col-sm-6">{{ expediente.id }}</dd>
 
         <dt class="col-sm-3">Título</dt>
-        <dd class="col-sm-9">{{ expediente.title }}</dd>
+        <dd class="col-sm-6">{{ expediente.title }}</dd>
 
         <dt class="col-sm-3">Descripción</dt>
-        <dd class="col-sm-9">{{ expediente.description }}</dd>
+        <dd class="col-sm-6">{{ expediente.description }}</dd>
 
         <dt class="col-sm-3">Estado</dt>
-        <dd class="col-sm-9">{{ expediente.status }}</dd>
+        <dd class="col-sm-6">{{ expediente.status }}</dd>
 
         <dt class="col-sm-3">Tipo de Caso</dt>
-        <dd class="col-sm-9">{{ expediente.case_type_name }}</dd>
+        <dd class="col-sm-6">{{ expediente.case_type_name }}</dd>
 
         <dt class="col-sm-3">Patrocinado</dt>
-        <dd class="col-sm-9">{{ expediente.sponsored_partner_name }}</dd>
+        <dd class="col-sm-6">{{ expediente.sponsored_partner_name }}</dd>
 
         <dt class="col-sm-3">Acusador</dt>
-        <dd class="col-sm-9">{{ expediente.accuser_partner_name }}</dd>
+        <dd class="col-sm-6">{{ expediente.accuser_partner_name }}</dd>
 
         <dt class="col-sm-3">Usuario Asignado</dt>
-        <dd class="col-sm-9">{{ expediente.assigned_username }}</dd>
+        <dd class="col-sm-6">{{ expediente.assigned_username }}</dd>
 
         <dt class="col-sm-3">Partner</dt>
-        <dd class="col-sm-9">{{ expediente.partner_name }}</dd>
+        <dd class="col-sm-6">{{ expediente.partner_name }}</dd>
 
         <dt class="col-sm-3">Creado</dt>
-        <dd class="col-sm-9">{{ expediente.created_at }}</dd>
+        <dd class="col-sm-6">{{ expediente.created_at }}</dd>
       </dl>
 
       <button @click="volverLista" class="btn btn-secondary">Volver a la lista</button>
       <button @click="editar" class="btn btn-primary ms-2">Editar expediente</button>
+      <!-- <button @click="agregarNota" class="btn btn-success ms-2">Agregar nota</button> -->
+      <button @click="verNotas" class="btn btn-info ms-2">Ver notas</button>
     </div>
   </div>
 

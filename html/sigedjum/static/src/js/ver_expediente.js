@@ -39,6 +39,12 @@ createApp({
       if (this.expediente && this.expediente.id) {
         window.location.href = `crear_expediente.html?id=${this.expediente.id}`;
       }
+    },
+    cargarNota() {
+      window.location.href = `crear_nota.html?expediente_id=${this.expediente.id}`;
+    },
+    verNotas() {
+      window.location.href = `ver_notas.html?expediente_id=${this.expediente.id}`;
     }
   },
   mounted() {
