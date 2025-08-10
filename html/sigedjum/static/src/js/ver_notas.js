@@ -35,7 +35,7 @@ createApp({
         },
         volverExpte() {
             const params = new URLSearchParams(window.location.search);
-            const expedienteId = params.get('id');
+            const expedienteId = params.get('expediente_id');
             if (expedienteId) {
                 window.location.href = `ver_expediente.html?id=${expedienteId}`;
             } else {
