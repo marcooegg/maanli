@@ -24,20 +24,10 @@ ter = #D6B170
     color: white;
 }
 
-/* background-color: var(--color-principal); */
 .btn-primary {
     background-color: #018080;
     color: white;
 }
-/* .button-secondary {
-    background-color: var(--color-secundario);
-    color: white;
-}
-.button-tertiary {
-    background-color: var(--color-terciario);
-    color: white;
-} */
-
 /* Navbar minimalista */
 .navbar-buttons {
   display: flex;
@@ -95,4 +85,155 @@ ter = #D6B170
 /* Reducir margenes verticales de labels y campos */
 .form-two-columns .mb-3 {
   margin-bottom: 0.75rem;
+}
+:root {
+  --color-principal: #018080;
+  --color-secundario: #B97039;
+  --color-terciario: #D6B170;
+
+  --color-blanco: #ffffff;
+  --color-negro: #000000;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--color-negro);
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+/* Textos con color principal, secundario y terciario */
+.text-primary {
+  color: var(--color-principal);
+}
+
+.text-secondary {
+  color: var(--color-secundario);
+}
+
+.text-tertiary {
+  color: var(--color-terciario);
+}
+
+/* Fondos con colores definidos */
+.bg-primary {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+}
+
+.bg-secondary {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+
+.bg-tertiary {
+  background-color: var(--color-terciario);
+  color: var(--color-blanco);
+}
+
+/* Botones */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+}
+
+/* Botón principal */
+.btn-primary {
+  background-color: var(--color-principal);
+  color: var(--color-blanco);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #016666; /* un poco más oscuro */
+  outline: none;
+}
+
+/* Botón secundario */
+.btn-secondary {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #a05e32;
+  outline: none;
+}
+
+/* Botón terciario */
+.btn-tertiary {
+  background-color: var(--color-terciario);
+  color: var(--color-blanco);
+}
+
+.btn-tertiary:hover,
+.btn-tertiary:focus {
+  background-color: #bca559;
+  outline: none;
+}
+
+/* Para inputs, selects, textarea - más compactos y limpios */
+input, select, textarea {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-principal);
+  outline: none;
+}
+
+/* Contenedor general para formularios con dos columnas */
+.form-grid-2cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 20px;
+}
+
+/* Navbar minimalista con texto blanco y sin recuadro */
+.navbar {
+  background-color: var(--color-principal);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar a {
+  color: var(--color-blanco);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+/* Separadores tipo barras para links navbar */
+.navbar a:not(:last-child)::after {
+  content: "|";
+  color: var(--color-blanco);
+  margin-left: 12px;
 }

@@ -15,13 +15,6 @@ try {
     $pdo = $conn->getConnection();
     $sql = "SELECT n.title,
         n.content
-        -- n.created_at,
-        -- n.updated_at,
-        -- app.date as appointment_date,
-        -- app.time as appointment_time,
-        -- c.id as case_id,
-        -- c.name as case_name,
-        -- u.username
     FROM `notes` n
     LEFT JOIN appointment app ON n.appointment_id = app.id
     LEFT JOIN `case` c ON c.id = n.case_id
