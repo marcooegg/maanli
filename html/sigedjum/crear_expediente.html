@@ -17,11 +17,17 @@
                 <a class="navbar-brand fw-bold" href="#">JURI</a>
             </div>
         </nav>
-        <div class="bg-primary p-2">
+        <!-- <div class="bg-primary p-2">
             <a href="mis_expedientes.html" class="btn btn-light btn-sm me-2">Mis casos</a>
             <button class="btn btn-light btn-sm me-2">Mis audiencias</button>
             <button class="btn btn-light btn-sm me-2">Mis documentos</button>
             <button class="btn btn-light btn-sm">Mis notificaciones</button>
+        </div> -->
+        <div class="bg-primary p-2 navbar-buttons">
+            <a href="mis_expedientes.html">Mis casos</a>
+            <button>Mis audiencias</button>
+            <button>Mis documentos</button>
+            <button>Mis notificaciones</button>
         </div>
     </header>
 
@@ -32,9 +38,9 @@
     <div v-if="error" class="alert alert-danger">{{ error }}</div>
     <div v-if="mensaje" class="alert alert-success">{{ mensaje }}</div>
 
-    <form @submit.prevent="guardar">
-      <div class="mb-3">
-        <label for="title" class="form-label">Título</label>
+    <form @submit.prevent="guardar" class="form-two-columns">
+      <div class="mb-3 full-width">
+        <label for="title" class="form-label ">Título</label>
         <input v-model="expediente.title" type="text" id="title" class="form-control" required />
       </div>
 
@@ -88,10 +94,12 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary" :disabled="cargando">
+     <div class="full-width mb-3 d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-grow-1" :disabled="cargando">
         {{ cargando ? (isEdit ? 'Guardando...' : 'Creando...') : (isEdit ? 'Guardar Cambios' : 'Crear Expediente') }}
-      </button>
-      <button type="button" class="btn btn-secondary ms-2" @click="volverLista" :disabled="cargando">Volver a la lista</button>
+        </button>
+        <button type="button" class="btn btn-secondary flex-grow-1" @click="volverLista" :disabled="cargando">Volver a la lista</button>
+    </div>
     </form>
   </div>
 

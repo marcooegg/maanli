@@ -37,3 +37,62 @@ ter = #D6B170
     background-color: var(--color-terciario);
     color: white;
 } */
+
+/* Navbar minimalista */
+.navbar-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.navbar-buttons a,
+.navbar-buttons button {
+  background: none !important;
+  border: none !important;
+  color: white !important;
+  padding: 0 0.3rem;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar-buttons a:hover,
+.navbar-buttons button:hover {
+  text-decoration: underline;
+}
+
+/* Separadores con barra vertical */
+.navbar-buttons a:not(:last-child)::after,
+.navbar-buttons button:not(:last-child)::after {
+  content: "|";
+  margin-left: 0.5rem;
+  color: white;
+}
+
+/* Formulario en dos columnas para pantallas md+ */
+.form-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 2rem;
+}
+
+/* Para campos que ocupen toda la fila (textarea) */
+.form-two-columns .full-width {
+  grid-column: 1 / -1;
+}
+
+/* Reducir tamaño de inputs y selects */
+.form-two-columns input.form-control,
+.form-two-columns select.form-select,
+.form-two-columns textarea.form-control {
+  font-size: 0.9rem;
+  padding: 0.35rem 0.5rem;
+}
+
+/* Reducir margenes verticales de labels y campos */
+.form-two-columns .mb-3 {
+  margin-bottom: 0.75rem;
+}
