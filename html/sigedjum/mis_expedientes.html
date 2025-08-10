@@ -1,56 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JURI - Mis expedientes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="static/src/css/styles.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.3.0/dist/vue.global.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>Mis expedientes</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
-    <!-- Cabecera -->
-    <header class="bg-primary">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="#">JURI</a>
-            </div>
-        </nav>
-        <div class="bg-primary p-2">
-            <button class="btn btn-light btn-sm me-2">Mis casos</button>
-            <button class="btn btn-light btn-sm me-2">Mis audiencias</button>
-            <button class="btn btn-light btn-sm me-2">Mis documentos</button>
-            <button class="btn btn-light btn-sm">Mis notificaciones</button>
-        </div>
-    </header>
-
-    <!-- Contenido principal -->
-    <div id="app">
-    <h1>Mis expedientes</h1>
-
-    <div class="mb-3">
-      <input
-        v-model="searchQuery"
-        @input="showTable"
-        type="text"
-        class="form-control"
-        placeholder="Buscar expediente..."
-      />
-    </div>
-
+<body class="p-4">
+  <div id="app">
+    <input
+      type="text"
+      v-model="searchQuery"
+      @input="showTable"
+      placeholder="Buscar expediente..."
+      class="form-control mb-3"
+    />
     <button @click="goCrear" class="btn btn-primary mb-3">Crear nuevo expediente</button>
 
-    <div id="table-container"></div>
-    </div>
+    <table class="table table-bordered" v-if="tableData.length">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Creado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in tableData" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.created_at }}</td>
+          <td>
+            <button @click="ver(item.id)" class="btn btn-info btn-sm">Ver</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-    <!-- Footer -->
-    <footer class="bg-primary text-white text-center py-3 mt-4">
-        <p class="mb-0">&copy; 2025 JURI. Todos los derechos reservados.</p>
-        <small><a href="#" class="text-white">Política de privacidad</a> | <a href="#" class="text-white">Términos de servicio</a></small>
-    </footer>
+    <p v-else>No hay expedientes para mostrar.</p>
+  </div>
 
-    <script src="static/src/js/mis_expedientes.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.3.0/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="static/src/js/mis_expedientes.js"></script>
 </body>
 </html>
