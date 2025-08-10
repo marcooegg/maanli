@@ -18,7 +18,7 @@ createApp({
             const id = params.get('expediente_id');
             this.expedienteId = id;
             axios.get('api/list_notas.php', {
-                params: { id }
+                params: { 'expediente_id': this.expedienteId }
             })
                 .then(res => {
                     if (res.data.success) {
