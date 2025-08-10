@@ -7,7 +7,8 @@ require_once "../php/db.php";
 
 try {
     // $pdo = new PDO($dsn, $user, $pass, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-    $pdo = new DataBaseConnection();
+    $conn = new DataBaseConnection();
+    $pdo = $conn->getConnection();
     $search = $_GET['search'] ?? '';
     if ($search) {
         $stmt = $pdo->prepare("SELECT id, title, description, status, created_at FROM `case` WHERE title LIKE ? ORDER BY created_at DESC");
