@@ -17,11 +17,16 @@ try {
 
     $sql = "SELECT
         c.id, c.title, c.description, c.status, c.created_at,
+        c.case_type_id,
         ct.name AS case_type_name,
+        c.sponsored_partner_id,
         sp.name AS sponsored_partner_name,
+        c.accuser_partner_id,
         ap.name AS accuser_partner_name,
-        u.username AS assigned_username,
-        p.name AS partner_name
+        c.assigned_user_id,
+        u.username AS assigned_user_name,
+        c.partner_id,
+        p.name AS partner_name,
     FROM `case` c
     LEFT JOIN case_type ct ON c.case_type_id = ct.id
     LEFT JOIN partner sp ON c.sponsored_partner_id = sp.id
