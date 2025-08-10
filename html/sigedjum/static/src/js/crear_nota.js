@@ -7,7 +7,7 @@ createApp({
         id: null,
         case_id: '',
         user_id: 1,
-        appointment_id : '',
+        appointment_id : null,
         title: '',
         content: '',
       },
