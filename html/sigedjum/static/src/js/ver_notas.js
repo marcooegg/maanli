@@ -8,6 +8,7 @@ createApp({
             error: '',
             notas: [],
             searchQuery: '',
+            expedienteId: null,
         };
     },
     methods: {
@@ -15,6 +16,7 @@ createApp({
             this.cargando = true;
             const params = new URLSearchParams(window.location.search);
             const id = params.get('expediente_id');
+            this.expedienteId = id;
             axios.get('api/list_notas.php', {
                 params: { id }
             })
@@ -31,7 +33,7 @@ createApp({
                 });
         },
         goCrear() {
-            window.location.href = 'crear_nota.html';
+            window.location.href = `crear_nota.html?id=${this.expedienteId}`;
         },
         volverExpte() {
             const params = new URLSearchParams(window.location.search);
