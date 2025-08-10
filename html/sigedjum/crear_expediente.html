@@ -27,68 +27,72 @@
 
     <!-- Contenido principal -->
     <div id="app">
-    <h1>Crear nuevo expediente</h1>
+    <h1>{{ isEdit ? 'Editar Expediente' : 'Crear Nuevo Expediente' }}</h1>
 
-    <form @submit.prevent="submitForm" class="mb-3">
+    <div v-if="error" class="alert alert-danger">{{ error }}</div>
+    <div v-if="mensaje" class="alert alert-success">{{ mensaje }}</div>
+
+    <form @submit.prevent="guardar">
       <div class="mb-3">
         <label for="title" class="form-label">Título</label>
-        <input type="text" id="title" v-model="form.title" class="form-control" required />
+        <input v-model="expediente.title" type="text" id="title" class="form-control" required />
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Descripción</label>
-        <textarea id="description" v-model="form.description" class="form-control" rows="3"></textarea>
+        <textarea v-model="expediente.description" id="description" class="form-control" rows="3" required></textarea>
       </div>
 
       <div class="mb-3">
         <label for="status" class="form-label">Estado</label>
-        <input type="text" id="status" v-model="form.status" class="form-control" required />
+        <input v-model="expediente.status" type="text" id="status" class="form-control" required />
       </div>
 
       <div class="mb-3">
-        <label for="case_type_id" class="form-label">Tipo de caso</label>
-        <select id="case_type_id" v-model="form.case_type_id" class="form-select" required>
+        <label for="case_type_id" class="form-label">Tipo de Caso</label>
+        <select v-model="expediente.case_type_id" id="case_type_id" class="form-select" required>
           <option value="" disabled>Seleccione un tipo</option>
-          <option v-for="type in caseTypes" :key="type.id" :value="type.id">{{ type.name }}</option>
+          <option v-for="ct in caseTypes" :key="ct.id" :value="ct.id">{{ ct.name }}</option>
         </select>
       </div>
 
       <div class="mb-3">
         <label for="sponsored_partner_id" class="form-label">Patrocinado</label>
-        <select id="sponsored_partner_id" v-model="form.sponsored_partner_id" class="form-select" required>
+        <select v-model="expediente.sponsored_partner_id" id="sponsored_partner_id" class="form-select" required>
           <option value="" disabled>Seleccione un patrocinado</option>
-          <option v-for="partner in partners" :key="partner.id" :value="partner.id">{{ partner.name }}</option>
+          <option v-for="p in partners" :key="p.id" :value="p.id">{{ p.name }}</option>
         </select>
       </div>
 
       <div class="mb-3">
         <label for="accuser_partner_id" class="form-label">Acusador</label>
-        <select id="accuser_partner_id" v-model="form.accuser_partner_id" class="form-select" required>
+        <select v-model="expediente.accuser_partner_id" id="accuser_partner_id" class="form-select" required>
           <option value="" disabled>Seleccione un acusador</option>
-          <option v-for="partner in partners" :key="partner.id" :value="partner.id">{{ partner.name }}</option>
+          <option v-for="p in partners" :key="p.id" :value="p.id">{{ p.name }}</option>
         </select>
       </div>
 
       <div class="mb-3">
-        <label for="assigned_user_id" class="form-label">Usuario asignado</label>
-        <select id="assigned_user_id" v-model="form.assigned_user_id" class="form-select" required>
+        <label for="assigned_user_id" class="form-label">Usuario Asignado</label>
+        <select v-model="expediente.assigned_user_id" id="assigned_user_id" class="form-select" required>
           <option value="" disabled>Seleccione un usuario</option>
-          <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
+          <option v-for="u in users" :key="u.id" :value="u.id">{{ u.username }}</option>
         </select>
       </div>
 
       <div class="mb-3">
-        <label for="partner_id" class="form-label">Partner (fijo)</label>
-        <select id="partner_id" v-model="form.partner_id" class="form-select" required>
-          <option v-for="partner in partners" :key="partner.id" :value="partner.id">{{ partner.name }}</option>
+        <label for="partner_id" class="form-label">Partner</label>
+        <select v-model="expediente.partner_id" id="partner_id" class="form-select" required>
+          <option value="" disabled>Seleccione un partner</option>
+          <option v-for="p in partners" :key="p.id" :value="p.id">{{ p.name }}</option>
         </select>
       </div>
 
-      <button type="submit" class="btn btn-success">Guardar</button>
-      <button @click.prevent="volverLista" class="btn btn-secondary ms-2">Volver a la lista</button>
+      <button type="submit" class="btn btn-primary" :disabled="cargando">
+        {{ cargando ? (isEdit ? 'Guardando...' : 'Creando...') : (isEdit ? 'Guardar Cambios' : 'Crear Expediente') }}
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" @click="volverLista" :disabled="cargando">Volver a la lista</button>
     </form>
-
-    <div v-if="mensaje" class="alert" :class="mensajeTipo">{{ mensaje }}</div>
   </div>
 
     <!-- Footer -->
