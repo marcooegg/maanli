@@ -7,8 +7,8 @@ require_once "../php/db.php";
 
 try {
     $conn = new DataBaseConnection();
-    $id = $_GET['expediente_id'] ?? null;
-    if (!$id) {
+    $expediente_id = $_GET['expediente_id'] ?? null;
+    if (!$expediente_id) {
         echo json_encode(['success' => false, 'error' => 'No se especificó ID']);
         exit;
     }
