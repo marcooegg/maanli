@@ -9,7 +9,7 @@ try {
     $conn = new DataBaseConnection();
     $pdo = $conn->getConnection();
 
-    $stmt = $pdo->query("SELECT id, name FROM users ORDER BY name");
+    $stmt = $pdo->query("SELECT users.id, partner.name FROM users INNER JOIN partner on users.partner_id = partner.id ORDER BY name");
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode(['success' => true, 'users' => $data]);
