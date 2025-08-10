@@ -26,7 +26,7 @@ try {
         c.assigned_user_id,
         u.username AS assigned_user_name,
         c.partner_id,
-        p.name AS partner_name,
+        p.name AS partner_name
     FROM `case` c
     LEFT JOIN case_type ct ON c.case_type_id = ct.id
     LEFT JOIN partner sp ON c.sponsored_partner_id = sp.id
