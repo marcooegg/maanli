@@ -26,40 +26,70 @@
     </header>
 
     <!-- Contenido principal -->
-    <div id="app" class="container mt-4 mb-5">
-        <h4 class="mb-3">Crear nuevo expediente</h4>
-        <form @submit.prevent="crearExpediente" class="card p-3 shadow-sm">
-            <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input type="text" v-model="form.name" class="form-control" required>
-            </div>
+    <div id="app">
+    <h1>Crear nuevo expediente</h1>
 
-            <div class="mb-3">
-                <label class="form-label">Descripción</label>
-                <textarea v-model="form.description" class="form-control" rows="3" required></textarea>
-            </div>
+    <form @submit.prevent="submitForm" class="mb-3">
+      <div class="mb-3">
+        <label for="title" class="form-label">Título</label>
+        <input type="text" id="title" v-model="form.title" class="form-control" required />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label">Estado</label>
-                <select v-model="form.status" class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option value="En proceso">En proceso</option>
-                    <option value="Archivado">Archivado</option>
-                    <option value="Finalizado">Finalizado</option>
-                </select>
-            </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea id="description" v-model="form.description" class="form-control" rows="3"></textarea>
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label">Fecha</label>
-                <input type="date" v-model="form.date" class="form-control" required>
-            </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Estado</label>
+        <input type="text" id="status" v-model="form.status" class="form-control" required />
+      </div>
 
-            <button type="submit" class="btn btn-success" :disabled="loading">
-                <span v-if="loading" class="spinner-border spinner-border-sm me-2"></span>
-                Guardar expediente
-            </button>
-        </form>
-    </div>
+      <div class="mb-3">
+        <label for="case_type_id" class="form-label">Tipo de caso</label>
+        <select id="case_type_id" v-model="form.case_type_id" class="form-select" required>
+          <option value="" disabled>Seleccione un tipo</option>
+          <option v-for="type in caseTypes" :key="type.id" :value="type.id">{{ type.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="sponsored_partner_id" class="form-label">Patrocinado</label>
+        <select id="sponsored_partner_id" v-model="form.sponsored_partner_id" class="form-select" required>
+          <option value="" disabled>Seleccione un patrocinado</option>
+          <option v-for="partner in partners" :key="partner.id" :value="partner.id">{{ partner.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="accuser_partner_id" class="form-label">Acusador</label>
+        <select id="accuser_partner_id" v-model="form.accuser_partner_id" class="form-select" required>
+          <option value="" disabled>Seleccione un acusador</option>
+          <option v-for="partner in partners" :key="partner.id" :value="partner.id">{{ partner.name }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="assigned_user_id" class="form-label">Usuario asignado</label>
+        <select id="assigned_user_id" v-model="form.assigned_user_id" class="form-select" required>
+          <option value="" disabled>Seleccione un usuario</option>
+          <option v-for="user in users" :key="user.id" :value="user.id">{{ user.username }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="partner_id" class="form-label">Partner (fijo)</label>
+        <select id="partner_id" v-model="form.partner_id" class="form-select" required>
+          <option v-for="partner in partners" :key="partner.id" :value="partner.id">{{ partner.name }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success">Guardar</button>
+      <button @click.prevent="volverLista" class="btn btn-secondary ms-2">Volver a la lista</button>
+    </form>
+
+    <div v-if="mensaje" class="alert" :class="mensajeTipo">{{ mensaje }}</div>
+  </div>
 
     <!-- Footer -->
     <footer class="bg-primary text-white text-center py-3 mt-4">
