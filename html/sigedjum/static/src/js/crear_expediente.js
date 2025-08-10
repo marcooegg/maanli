@@ -35,8 +35,7 @@ createApp({
       // Cargar partners
       axios.get('api/list_partners.php').then(res => {
         if (res.data.success) {
-          this.partners = res.data.partners;
-          if(this.partners.length) this.expediente.partner_id = this.partners[0].id; // Valor por defecto
+          this.partners = res.data.partners; // Valor por defecto
         }
       });
 
