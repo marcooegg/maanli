@@ -31,7 +31,6 @@ try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':expediente_id' => $expediente_id]);
 
-    $expediente = $stmt->fetch(PDO::FETCH_ASSOC);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     echo json_encode(['success' => true, 'notes' => $data]);
