@@ -15,56 +15,46 @@ DELETE FROM attachment;
 INSERT INTO
     partner (name, email)
 VALUES
-    ('Administrador', 'admin@juri.com.ar');
+    ('Juri', ''),
+    ('Administrador', 'admin@juri.com.ar'),
+    ('Defensor 6', 'defensor_6@siged.com.ar'),
+    ('Secretario 6', 'secretario_6@siged.com.ar'),
+    ('Escribiente 6', 'escribiente_6@siged.com.ar');
+
+SET @juri_id = (SELECT id FROM partner WHERE name = 'Juri' LIMIT 1);
+SET @admin_id = (SELECT id FROM partner WHERE email = 'admin@juri.com.ar' LIMIT 1);
+SET @defensor6_id = (SELECT id FROM partner WHERE email = 'defensor_6@siged.com.ar' LIMIT 1);
+SET @secretario6_id = (SELECT id FROM partner WHERE email = 'secretario_6@siged.com.ar' LIMIT 1);
+SET @escribiente6_id = (SELECT id FROM partner WHERE email = 'escribiente_6@siged.com.ar' LIMIT 1);
 
 INSERT INTO
     users (username, password, partner_id)
 VALUES
-    (
-        'admin',
-        'admin123',
-        (
-            SELECT
-                id
-            FROM
-                partner
-            WHERE
-                email = 'admin@juri.com.ar'
-            LIMIT
-                1
-        )
-    );
+    ('JuriBot', 'juri123', @juri_id),
+    ('admin', 'admin123', @admin_id),
+    ('defensor_6', 'defensor123', @defensor6_id),
+    ('secretario_6', 'secretario123', @secretario6_id),
+    ('escribiente_6', 'escribiente123', @escribiente6_id);
+
+SET @admin_user_id = (SELECT id FROM users WHERE username = 'admin' LIMIT 1);
+SET @defensor6_user_id = (SELECT id FROM users WHERE username = 'defensor_6' LIMIT 1);
+SET @secretario6_user_id = (SELECT id FROM users WHERE username = 'secretario_6' LIMIT 1);
+SET @escribiente6_user_id = (SELECT id FROM users WHERE username = 'escribiente_6' LIMIT 1);
 
 INSERT INTO
     `groups` (name, description)
 VALUES
     ('Administrators', 'Group for system administrators');
 
+SET @group_admin = (SELECT id FROM `groups` WHERE name = 'Administrators' LIMIT 1);
+
 INSERT INTO 
     user_group (user_id, group_id)
 VALUES
-    (
-        (
-            SELECT
-                id
-            FROM
-                users
-            WHERE
-                username = 'admin'
-            LIMIT
-                1
-        ),
-        (
-            SELECT
-                id
-            FROM
-                `groups`
-            WHERE
-                name = 'Administrators'
-            LIMIT
-                1
-        )
-    );
+    (@admin_user_id, @group_admin),
+    (@defensor6_user_id, @group_admin),
+    (@secretario6_user_id, @group_admin),
+    (@escribiente6_user_id, @group_admin);
 
 -- insert Countries from latin america
 INSERT INTO
