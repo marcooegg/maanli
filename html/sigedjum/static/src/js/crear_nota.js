@@ -55,7 +55,7 @@ createApp({
               this.nota = {
                 id: null,
                 case_id: '',
-                user_id: '',
+                user_id: 6,
                 appointment_id : '',
                 title: '',
                 content: '',
