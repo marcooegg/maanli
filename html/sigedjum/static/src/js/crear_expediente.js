@@ -26,19 +26,26 @@ createApp({
   methods: {
     cargarSelects() {
       // Cargar datos para selects
-      axios.get('api/selects_data.php')
-        .then(res => {
-          if (res.data.success) {
-            this.caseTypes = res.data.case_types;
-            this.partners = res.data.partners;
-            this.users = res.data.users;
-          } else {
-            this.error = 'Error al cargar datos de selección';
-          }
-        })
-        .catch(() => {
-          this.error = 'Error al conectar con el servidor para selects';
-        });
+      axios.get('api/list_case_types.php').then(res => {
+        if (res.data.success) {
+          this.caseTypes = res.data.case_types;
+        }
+      });
+
+      // Cargar partners
+      axios.get('api/list_partners.php').then(res => {
+        if (res.data.success) {
+          this.partners = res.data.partners;
+          if(this.partners.length) this.form.partner_id = this.partners[0].id; // Valor por defecto
+        }
+      });
+
+      // Cargar users
+      axios.get('api/list_users.php').then(res => {
+        if (res.data.success) {
+          this.users = res.data.users;
+        }
+      });
     },
     cargarExpediente(id) {
       this.cargando = true;
