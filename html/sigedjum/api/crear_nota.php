@@ -12,7 +12,7 @@ try {
     // Recibimos datos JSON POST (axios por default manda JSON)
     $input = json_decode(file_get_contents('php://input'), true);
 
-    $sql = "INSERT INTO `case` 
+    $sql = "INSERT INTO `notes` 
       (title, content, case_id, user_id, appointment_id) 
       VALUES 
       (:title, :content, :case_id, :user_id, :appointment_id)";
