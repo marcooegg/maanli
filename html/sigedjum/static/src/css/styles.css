@@ -237,3 +237,11 @@ input:focus, select:focus, textarea:focus {
   color: var(--color-blanco);
   margin-left: 12px;
 }
+#app {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
