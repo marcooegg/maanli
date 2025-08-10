@@ -17,6 +17,7 @@ createApp({
             const params = new URLSearchParams(window.location.search);
             const id = params.get('expediente_id');
             this.expedienteId = id;
+            this.expedienteId = parseInt(id, 10);
             axios.get('api/list_notas.php', {
                 params: { 'expediente_id': this.expedienteId }
             })
