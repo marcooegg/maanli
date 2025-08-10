@@ -14,7 +14,7 @@ try {
     }
     $pdo = $conn->getConnection();
     $sql = "SELECT n.title,
-        n.content,
+        n.content
         -- n.created_at,
         -- n.updated_at,
         -- app.date as appointment_date,
