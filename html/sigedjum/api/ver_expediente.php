@@ -24,7 +24,7 @@ try {
         c.accuser_partner_id,
         ap.name AS accuser_partner_name,
         c.assigned_user_id,
-        u.name as username,
+        u.username,
         u.username AS assigned_user_name,
         c.partner_id,
         p.name AS partner_name
@@ -32,7 +32,7 @@ try {
     LEFT JOIN case_type ct ON c.case_type_id = ct.id
     LEFT JOIN partner sp ON c.sponsored_partner_id = sp.id
     LEFT JOIN partner ap ON c.accuser_partner_id = ap.id
-    LEFT JOIN (SELECT users.id, partner.name FROM users INNER JOIN partner on users.partner_id = partner.id ORDER BY name) u ON c.assigned_user_id = u.id
+    LEFT JOIN (SELECT users.id, partner.name as username FROM users INNER JOIN partner on users.partner_id = partner.id ORDER BY name) u ON c.assigned_user_id = u.id
 
     LEFT JOIN partner p ON c.partner_id = p.id
     WHERE c.id = :id";
