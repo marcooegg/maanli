@@ -35,13 +35,28 @@
             return $stmt->fetchAll($fetchMode);
         }
 
-        public function write(string $table,array $fields_values, $fetchMode = PDO::FETCH_ASSOC) {
+        public function write(string $table, array $fields_values) {
+            if (empty($table) || empty($fields_values)) {
+                throw new InvalidArgumentException('Table and fields_values are required');
+            }
+
             $fields = array_keys($fields_values);
-            $values = array_values($fields_values);
-            $query = "INSERT INTO {$table} ({$fields}) VALUES {$values}";
+            $placeholders = [];
+            $params = [];
+            foreach ($fields as $field) {
+                // named placeholders (without the ':' key when passing to execute)
+                $placeholders[] = ':' . $field;
+                $params[$field] = $fields_values[$field];
+            }
+
+            // quote column names to avoid reserved-word issues
+            $fields_list = implode(', ', array_map(function($f){ return "`$f`"; }, $fields));
+            $placeholders_list = implode(', ', $placeholders);
+
+            $query = "INSERT INTO {$table} ({$fields_list}) VALUES ({$placeholders_list})";
 
             $stmt = $this->pdo->prepare($query);
-            $res = $stmt->execute($params);
+            $stmt->execute($params);
             return $this->pdo->lastInsertId();
         }
 
