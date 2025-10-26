@@ -1,16 +1,13 @@
 <?php
-    // require_once '../env/secret.php';
-    // $DB_HOST = 'c282.ferozo.com';
-    // $DB_HOST = "localhost";
-    // $DB_PORT = '2092';
-    // $DB_USER = 'c2821127_JURI_01';
-    // $DB_PASS = 'PUnuru87fi';
-    // $DB_NAME = 'c2821127_JURI_01';
-    // $DB_CHARSET = 'utf8mb4';
     class DataBaseConnection {
         public $pdo;
 
-        public function __construct($host = "localhost", $port = "2092", $user = "c2821127_JURI_01", $pass = "PUnuru87fi", $name = "c2821127_JURI_01", $charset = "utf8mb4") {
+        public function __construct($host, $port, $user, $pass, $name, $charset = "utf8mb4") {
+            $host = $host ?? getenv('DB_HOST') ?? 'localhost';
+            $port = $port ?? getenv('DB_PORT') ?? 2092;
+            $user = $user ?? getenv('DB_USER') ?? 'c2821127_tprac3';
+            $pass = $pass ?? getenv('DB_PASS') ?? 'ma83MUriwa';
+            $name = $name ?? getenv('DB_NAME') ?? 'c2821127_tprac3';
             try {
                 $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$name;charset=$charset", $user, $pass);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
