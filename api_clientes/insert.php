@@ -39,9 +39,9 @@ try {
 
     // usamos el método write() de la clase DataBaseConnection
     $insertId = $conn->write('clientes', $data);
-    echo json_encode(['success' => true, 'id' => $insertId, 'clientes' => $data]);
+    echo json_encode(['ok' => true, 'id' => $insertId, 'clientes' => $data]);
 } catch (Exception $e) {
     // atrapamos Exception para cubrir PDOException e InvalidArgumentException
-    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+    echo json_encode(['ok' => false, 'error' => $e->getMessage()]);
 }
 ?>
