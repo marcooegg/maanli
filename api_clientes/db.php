@@ -2,7 +2,7 @@
     class DataBaseConnection {
         public $pdo;
 
-        public function __construct($host, $port, $user, $pass, $name, $charset = "utf8mb4") {
+        public function __construct($host = null, $port = null, $user = null, $pass = null, $name = null, $charset = "utf8mb4") {
             $host = $host ?? getenv('DB_HOST') ?? 'localhost';
             $port = $port ?? getenv('DB_PORT') ?? 2092;
             $user = $user ?? getenv('DB_USER') ?? 'c2821127_tprac3';
