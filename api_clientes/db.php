@@ -35,15 +35,15 @@
             return $stmt->fetchAll($fetchMode);
         }
 
-        // public function write(string $table,array $fields_values, $fetchMode = PDO::FETCH_ASSOC) {
-        //     $fields = array_keys($fields_values);
-        //     $values = array_values($fields_values);
-        //     $query = "INSERT INTO {$table} ({$fields}) VALUES {$values}";
+        public function write(string $table,array $fields_values, $fetchMode = PDO::FETCH_ASSOC) {
+            $fields = array_keys($fields_values);
+            $values = array_values($fields_values);
+            $query = "INSERT INTO {$table} ({$fields}) VALUES {$values}";
 
-        //     $stmt = $this->pdo->prepare($query);
-        //     $res = $stmt->execute($params);
-        //     return $this->pdo->lastInsertId();
-        // }
+            $stmt = $this->pdo->prepare($query);
+            $res = $stmt->execute($params);
+            return $this->pdo->lastInsertId();
+        }
 
         // public function call(string $method,array $fields_values){
         //     $fields = array_keys($fields_values);

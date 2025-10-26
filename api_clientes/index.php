@@ -12,7 +12,7 @@ try {
     $stmt = $pdo->query("SELECT id_cliente, nombre, dni, telefono FROM `clientes` ORDER BY id_cliente");
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode(['success' => true, 'clientes' => $data]);
+    echo json_encode($data);
 } catch (PDOException $e) {
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }
