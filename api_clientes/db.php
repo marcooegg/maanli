@@ -3,11 +3,11 @@
         public $pdo;
 
         public function __construct($host = null, $port = null, $user = null, $pass = null, $name = null, $charset = "utf8mb4") {
-            $host = $host ?? getenv('DB_HOST') ?? 'localhost';
-            $port = $port ?? getenv('DB_PORT') ?? 2092;
-            $user = $user ?? getenv('DB_USER') ?? 'c2821127_tprac3';
-            $pass = $pass ?? getenv('DB_PASS') ?? 'ma83MUriwa';
-            $name = $name ?? getenv('DB_NAME') ?? 'c2821127_tprac3';
+            $host = 'localhost';
+            $port = 2092;
+            $user = 'c2821127_tprac3';
+            $pass = 'ma83MUriwa';
+            $name = 'c2821127_tprac3';
             try {
                 $this->pdo = new PDO("mysql:host=$host;port=$port;dbname=$name;charset=$charset", $user, $pass);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
